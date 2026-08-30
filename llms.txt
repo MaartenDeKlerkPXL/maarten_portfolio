@@ -1,0 +1,19 @@
+# Maarten de Klerk — Portfolio
+
+> UI/UX Designer & Web Developer from Nijswiller, the Netherlands (South Limburg). Builds websites of every shape and size — from landing pages to complete web applications — combining frontend development, UI/UX design, and visual/motion design. Available for new projects.
+
+## Pages
+
+- [Home (NL)](/nl/index.html): Introduction, featured projects, and skills overview.
+- [Home (EN)](/en/index.html): English version of the homepage.
+- [About (NL)](/nl/over.html): Background, skills (frontend development, UI/UX design, graphic design, motion & 3D), and tools.
+- [About (EN)](/en/about.html): English version of the about page.
+- [Projects (NL)](/nl/projecten.html): Portfolio of web, app, design, and motion projects, filterable by category.
+- [Projects (EN)](/en/projects.html): English version of the projects page.
+- [Contact (NL)](/nl/contact.html): Contact form, email, phone, and social links.
+- [Contact (EN)](/en/contact.html): English version of the contact page.
+
+## Notes
+
+- The site is available in Dutch (default, under /nl/) and English (under /en/); each page links to its counterpart.
+- Contact: maarten.deklerk@student.pxl.be

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Projects by Maarten de Klerk — Campus Karting App, Campus Karting Website and BrightNews. Web, app and design." />
+  <meta name="theme-color" content="#0A0A0F" />
+  <title>Projects — Maarten de Klerk</title>
+
+  <script>try{var t=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',t==='light'?'light':'dark');}catch(e){}</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@600;700;800;900&family=DM+Sans:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../ui/css/themes.css" />
+  <link rel="stylesheet" href="../ui/css/style.css" />
+  <link rel="stylesheet" href="../ui/css/animations.css" />
+  <link rel="stylesheet" href="../ui/css/components.css" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232563EB'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='18' font-weight='bold' fill='white' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E" />
+</head>
+
+<body>
+  <div class="bg-mesh" aria-hidden="true"></div>
+  <div class="bg-grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <div class="nav__inner">
+      <a class="wordmark" href="index.html" aria-label="Maarten de Klerk — home">
+        <span class="wordmark__dot" aria-hidden="true"></span>
+        Maarten de Klerk
+      </a>
+      <nav class="nav__links" aria-label="Main menu">
+        <a class="nav__link" href="index.html">Home</a>
+        <a class="nav__link" href="about.html">About</a>
+        <a class="nav__link" href="projects.html" aria-current="page">Projects</a>
+        <a class="nav__link" href="contact.html">Contact</a>
+      </nav>
+      <div class="nav__controls">
+        <button class="icon-btn theme-toggle" data-theme-toggle aria-label="Toggle theme">
+          <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+        <a class="icon-btn lang-toggle" href="../nl/projecten.html" data-no-transition aria-label="Schakel naar Nederlands">
+          <span>NL</span><span class="sep">/</span><span class="is-active">EN</span>
+        </a>
+        <button class="hamburger" data-menu-toggle aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a class="mobile-menu__link" data-idx="01" href="index.html">Home</a>
+    <a class="mobile-menu__link" data-idx="02" href="about.html">About</a>
+    <a class="mobile-menu__link" data-idx="03" href="projects.html">Projects</a>
+    <a class="mobile-menu__link" data-idx="04" href="contact.html">Contact</a>
+    <div class="mobile-menu__meta">
+      <a class="icon-btn tip" data-tip="GitHub" href="https://github.com/MaartenDeKlerkPXL" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.2-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 4.6 18 4.9 18 4.9c.6 1.6.2 2.8.1 3.1.8.9 1.2 1.9 1.2 3.2 0 4.6-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg></a>
+      <a class="icon-btn tip" data-tip="LinkedIn" href="https://www.linkedin.com/in/maarten-deklerk0123/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33 0-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+      <a class="icon-btn tip" data-tip="Email" href="mailto:maarten.deklerk@student.pxl.be" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
+    </div>
+  </div>
+
+  <main>
+    <section class="page-hero">
+      <canvas id="projects-canvas" class="page-hero__canvas" aria-hidden="true"></canvas>
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a><span class="sep">›</span><span>Projects</span>
+        </nav>
+        <h1 class="page-title">Projects</h1>
+        <p class="lead">A selection of what I've built and designed — from mobile apps to complete web platforms.</p>
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="container">
+        <h2 class="sr-only">All projects</h2>
+        <div class="filters" data-filters role="tablist" aria-label="Filter projects" style="margin-bottom: var(--sp-5)">
+          <button class="filter-btn is-active" data-filter="all" role="tab" aria-selected="true">All</button>
+          <button class="filter-btn" data-filter="web" role="tab" aria-selected="false">Web</button>
+          <button class="filter-btn" data-filter="app" role="tab" aria-selected="false">App</button>
+          <button class="filter-btn" data-filter="design" role="tab" aria-selected="false">Design</button>
+          <button class="filter-btn" data-filter="motion" role="tab" aria-selected="false">Motion</button>
+        </div>
+
+        <div class="project-grid" data-project-grid>
+          <div class="reveal-wrap" data-category="app design" data-reveal="fade-up" data-delay="0">
+            <a class="project-card tilt" data-tilt href="https://www.figma.com/proto/8naGKoPp9s6wzw9ctjrkT6/Campus-karting-App---portfolio?node-id=1-863&viewport=198%2C214%2C0.26&t=KV0E3e67MBYP3A11-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=1%3A863&page-id=0%3A1" target="_blank" rel="noopener">
+              <div class="project-card__media">
+                <picture>
+                  <source srcset="../assets/campuskartingapp.webp" type="image/webp" />
+                  <img src="../assets/campuskartingapp.png" alt="Campus Karting mobile app" loading="lazy" width="393" height="600" />
+                </picture>
+                <div class="project-card__overlay"><span>View Figma prototype
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+              </div>
+              <div class="project-card__body">
+                <div class="project-card__meta"><span class="project-card__cat">App</span><span class="project-card__year">2026</span></div>
+                <h3>Campus Karting App</h3>
+                <p>Mobile app for racing fans to track live lap times, view standings, and book race heats.</p>
+                <div class="project-card__tags"><span class="tag">Mobile App</span><span class="tag">UI/UX</span></div>
+              </div>
+              <span class="tilt__glare" aria-hidden="true"></span>
+            </a>
+          </div>
+
+          <div class="reveal-wrap" data-category="web design" data-reveal="fade-up" data-delay="60">
+            <a class="project-card tilt" data-tilt href="https://www.figma.com/proto/uVIVMtHAuVKpu4QCEdKCjQ/WPL2--Karting-Genk?node-id=2157-5604&viewport=-2233%2C155%2C0.11&t=IGvo1Y5aUlt6CcJ2-1&scaling=min-zoom&content-scaling=fixed&page-id=2157%3A5503" target="_blank" rel="noopener">
+              <div class="project-card__media">
+                <picture>
+                  <source srcset="../assets/campuskarting-web.webp" type="image/webp" />
+                  <img src="../assets/campuskarting-web.png" alt="Campus Karting website" loading="lazy" width="760" height="1150" />
+                </picture>
+                <div class="project-card__overlay"><span>View Figma prototype
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+              </div>
+              <div class="project-card__body">
+                <div class="project-card__meta"><span class="project-card__cat">Web</span><span class="project-card__year">2026</span></div>
+                <h3>Campus Karting Website</h3>
+                <p>A modern web platform with intuitive booking, real-time track occupancy, and a sharp sporty aesthetic.</p>
+                <div class="project-card__tags"><span class="tag">Website</span><span class="tag">Frontend</span></div>
+              </div>
+              <span class="tilt__glare" aria-hidden="true"></span>
+            </a>
+          </div>
+
+          <div class="reveal-wrap" data-category="web design" data-reveal="fade-up" data-delay="120">
+            <a class="project-card tilt" data-tilt href="https://maartendeklerkpxl.github.io/IBEmotion-Bob/" target="_blank" rel="noopener">
+              <div class="project-card__media">
+                <picture>
+                  <source srcset="../assets/ibemotion.webp" type="image/webp" />
+                  <img src="../assets/ibemotion.png" alt="IBE Motion portfolio platform" loading="lazy" width="1100" height="538" />
+                </picture>
+                <div class="project-card__overlay"><span>View project
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+              </div>
+              <div class="project-card__body">
+                <div class="project-card__meta"><span class="project-card__cat">Web · Design</span><span class="project-card__year">2026</span></div>
+                <h3>IBE Motion</h3>
+                <p>A portfolio platform for a motion designer to showcase After Effects work.</p>
+                <div class="project-card__tags"><span class="tag">UI/UX</span><span class="tag">Motion</span></div>
+              </div>
+              <span class="tilt__glare" aria-hidden="true"></span>
+            </a>
+          </div>
+
+          <div class="reveal-wrap" data-category="web" data-reveal="fade-up" data-delay="180">
+            <a class="project-card tilt" data-tilt href="https://maartendeklerkpxl.github.io/uren-invuller/" target="_blank" rel="noopener">
+              <div class="project-card__media">
+                <picture>
+                  <source srcset="../assets/urenregistratie.webp" type="image/webp" />
+                  <img src="../assets/urenregistratie.png" alt="Time tracking web app" loading="lazy" width="1100" height="538" />
+                </picture>
+                <div class="project-card__overlay"><span>View project
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+              </div>
+              <div class="project-card__body">
+                <div class="project-card__meta"><span class="project-card__cat">Web</span><span class="project-card__year">2026</span></div>
+                <h3>Time Tracker App</h3>
+                <p>A web app for my courier job that logs hours and syncs straight to Google Sheets.</p>
+                <div class="project-card__tags"><span class="tag">Web App</span><span class="tag">Automation</span></div>
+              </div>
+              <span class="tilt__glare" aria-hidden="true"></span>
+            </a>
+          </div>
+
+          <div class="reveal-wrap" data-category="motion" data-reveal="fade-up" data-delay="240">
+            <button type="button" class="project-card tilt" data-tilt data-video-src="../assets/music-match.mp4" data-video-title="Music Match">
+              <div class="project-card__media project-card__media--reel">
+                <span class="project-card__reel-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.54 10.73c-.1-.31-.19-.61-.29-.92s-.19-.6-.27-.89c-.08-.28-.15-.54-.22-.78h-.02c-.09.43-.2.86-.34 1.29-.15.48-.3.98-.46 1.48-.13.51-.29.98-.44 1.4h2.54c-.06-.21-.14-.46-.23-.72-.09-.27-.18-.56-.27-.86zm8.58-.29c-.55-.03-1.07.26-1.33.76-.12.23-.19.47-.22.72h2.109c.26 0 .45 0 .57-.01.08-.01.16-.03.23-.08v-.1c0-.13-.021-.25-.061-.37-.178-.56-.708-.94-1.298-.92zM19.75.3H4.25C1.9.3 0 2.2 0 4.55v14.9c0 2.35 1.9 4.25 4.25 4.25h15.5c2.35 0 4.25-1.9 4.25-4.25V4.55C24 2.2 22.1.3 19.75.3zm-7.04 16.511h-2.09c-.07.01-.14-.041-.16-.11l-.82-2.4H5.92l-.76 2.36c-.02.09-.1.15-.19.14H3.09c-.11 0-.14-.06-.11-.18L6.2 7.39c.03-.1.06-.19.1-.31.04-.21.06-.43.06-.65-.01-.05.03-.1.08-.11h2.59c.07 0 .12.03.13.08l3.65 10.25c.03.11.001.161-.1.161zm7.851-3.991c-.021.189-.031.33-.041.42-.01.07-.069.13-.14.13-.06 0-.17.01-.33.021-.159.02-.35.029-.579.029-.23 0-.471-.04-.73-.04h-3.17c.039.31.14.62.31.89.181.271.431.48.729.601.4.17.841.26 1.281.25.35-.011.699-.04 1.039-.11.311-.039.61-.119.891-.23.05-.039.08-.02.08.08v1.531c0 .039-.01.08-.021.119-.021.03-.04.051-.069.07-.32.14-.65.24-1 .3-.471.09-.94.13-1.42.12-.761 0-1.4-.12-1.92-.35-.49-.211-.921-.541-1.261-.95-.319-.39-.55-.83-.69-1.31-.14-.471-.209-.961-.209-1.461 0-.539.08-1.07.25-1.59.16-.5.41-.96.75-1.37.33-.4.739-.72 1.209-.95.471-.23 1.03-.31 1.67-.31.531-.01 1.06.09 1.55.31.41.18.77.45 1.05.8.26.34.47.72.601 1.14.129.4.189.81.189 1.22 0 .24-.01.45-.019.64z"/></svg></span>
+                <span class="project-card__reel-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+              </div>
+              <div class="project-card__body">
+                <div class="project-card__meta"><span class="project-card__cat">Motion</span><span class="project-card__year">2025</span></div>
+                <h3>Music Match</h3>
+                <p>Project — description coming soon.</p>
+                <div class="project-card__tags"><span class="tag">Video</span></div>
+              </div>
+              <span class="tilt__glare" aria-hidden="true"></span>
+            </button>
+          </div>
+
+          <div class="reveal-wrap" data-category="motion" data-reveal="fade-up" data-delay="300">
+            <button type="button" class="project-card tilt" data-tilt data-video-src="../assets/blender-render-3d.mp4" data-video-title="Blender Render 3D">
+              <div class="project-card__media project-card__media--reel">
+                <span class="project-card__reel-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.51 13.214c.046-.8.438-1.506 1.03-2.006a3.424 3.424 0 0 1 2.212-.79c.85 0 1.631.3 2.211.79.592.5.983 1.206 1.028 2.005.045.823-.285 1.586-.865 2.153a3.389 3.389 0 0 1-2.374.938 3.393 3.393 0 0 1-2.376-.938c-.58-.567-.91-1.33-.865-2.152M7.35 14.831c.006.314.106.922.256 1.398a7.372 7.372 0 0 0 1.593 2.757 8.227 8.227 0 0 0 2.787 2.001 8.947 8.947 0 0 0 3.66.76 8.964 8.964 0 0 0 3.657-.772 8.285 8.285 0 0 0 2.785-2.01 7.428 7.428 0 0 0 1.592-2.762 6.964 6.964 0 0 0 .25-3.074 7.123 7.123 0 0 0-1.016-2.779 7.764 7.764 0 0 0-1.852-2.043h.002L13.566 2.55l-.02-.015c-.492-.378-1.319-.376-1.86.002-.547.382-.609 1.015-.123 1.415l-.001.001 3.126 2.543-9.53.01h-.013c-.788.001-1.545.518-1.695 1.172-.154.665.38 1.217 1.2 1.22V8.9l4.83-.01-8.62 6.617-.034.025c-.813.622-1.075 1.658-.563 2.313.52.667 1.625.668 2.447.004L7.414 14s-.069.52-.063.831zm12.09 1.741c-.97.988-2.326 1.548-3.795 1.55-1.47.004-2.827-.552-3.797-1.538a4.51 4.51 0 0 1-1.036-1.622 4.282 4.282 0 0 1 .282-3.519 4.702 4.702 0 0 1 1.153-1.371c.942-.768 2.141-1.183 3.396-1.185 1.256-.002 2.455.41 3.398 1.175.48.391.87.854 1.152 1.367a4.28 4.28 0 0 1 .522 1.706 4.236 4.236 0 0 1-.239 1.811 4.54 4.54 0 0 1-1.035 1.626"/></svg></span>
+                <span class="project-card__reel-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+              </div>
+              <div class="project-card__body">
+                <div class="project-card__meta"><span class="project-card__cat">Motion</span><span class="project-card__year">2025</span></div>
+                <h3>Blender Render 3D</h3>
+                <p>Project — description coming soon.</p>
+                <div class="project-card__tags"><span class="tag">Video</span></div>
+              </div>
+              <span class="tilt__glare" aria-hidden="true"></span>
+            </button>
+          </div>
+
+          <div class="reveal-wrap" data-category="web" data-reveal="fade-up" data-delay="360">
+            <a class="project-card tilt" data-tilt href="https://einklang-simpelveld.netlify.app/" target="_blank" rel="noopener">
+              <div class="project-card__media">
+                <picture>
+                  <source srcset="../assets/einklang.webp" type="image/webp" />
+                  <img src="../assets/einklang.png" alt="Einklang website" loading="lazy" width="1100" height="542" />
+                </picture>
+                <div class="project-card__overlay"><span>View project
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+              </div>
+              <div class="project-card__body">
+                <div class="project-card__meta"><span class="project-card__cat">Web</span><span class="project-card__year">2026</span></div>
+                <h3>Einklang</h3>
+                <p>A calm, grounded website for a wellness and sound-therapy studio.</p>
+                <div class="project-card__tags"><span class="tag">Website</span><span class="tag">Frontend</span></div>
+              </div>
+              <span class="tilt__glare" aria-hidden="true"></span>
+            </a>
+          </div>
+
+          <div class="reveal-wrap" data-category="web" data-reveal="fade-up" data-delay="420">
+            <a class="project-card tilt" data-tilt href="https://spirithorses-be.netlify.app/" target="_blank" rel="noopener">
+              <div class="project-card__media">
+                <picture>
+                  <source srcset="../assets/spirithorses.webp" type="image/webp" />
+                  <img src="../assets/spirithorses.png" alt="Spirithorses website" loading="lazy" width="1100" height="547" />
+                </picture>
+                <div class="project-card__overlay"><span>View project
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+              </div>
+              <div class="project-card__body">
+                <div class="project-card__meta"><span class="project-card__cat">Web</span><span class="project-card__year">2026</span></div>
+                <h3>Spirithorses</h3>
+                <p>A warm website for equine coaching, built around trust and connection.</p>
+                <div class="project-card__tags"><span class="tag">Website</span><span class="tag">Frontend</span></div>
+              </div>
+              <span class="tilt__glare" aria-hidden="true"></span>
+            </a>
+          </div>
+
+          <div class="reveal-wrap" data-category="web" data-reveal="fade-up" data-delay="480">
+            <a class="project-card tilt" data-tilt href="https://t-dak.netlify.app/" target="_blank" rel="noopener">
+              <div class="project-card__media">
+                <picture>
+                  <source srcset="../assets/t-dakwerken.webp" type="image/webp" />
+                  <img src="../assets/t-dakwerken.png" alt="T-Dakwerken website" loading="lazy" width="1100" height="541" />
+                </picture>
+                <div class="project-card__overlay"><span>View project
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+              </div>
+              <div class="project-card__body">
+                <div class="project-card__meta"><span class="project-card__cat">Web</span><span class="project-card__year">2026</span></div>
+                <h3>T-Dakwerken</h3>
+                <p>A clean site for a roofing company that puts craftsmanship front and center.</p>
+                <div class="project-card__tags"><span class="tag">Website</span><span class="tag">Frontend</span></div>
+              </div>
+              <span class="tilt__glare" aria-hidden="true"></span>
+            </a>
+          </div>
+
+          <div class="reveal-wrap" data-category="web" data-reveal="fade-up" data-delay="480">
+            <a class="project-card tilt" data-tilt href="https://Brightnews.online" target="_blank" rel="noopener">
+              <div class="project-card__media">
+                <picture>
+                  <source srcset="../assets/brightnews.webp" type="image/webp" />
+                  <img src="../assets/brightnews.png" alt="BrightNews news portal" loading="lazy" width="602" height="910" />
+                </picture>
+                <div class="project-card__overlay"><span>View project
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+              </div>
+              <div class="project-card__body">
+                <div class="project-card__meta"><span class="project-card__cat">Web</span><span class="project-card__year">2025</span></div>
+                <h3>BrightNews</h3>
+                <p>News portal with a fresh, clean aesthetic and built-in sentiment analysis.</p>
+                <div class="project-card__tags"><span class="tag">Website</span><span class="tag">Sentiment Analysis</span></div>
+              </div>
+              <span class="tilt__glare" aria-hidden="true"></span>
+            </a>
+          </div>
+
+          <div class="reveal-wrap" data-category="design" data-reveal="fade-up" data-delay="480">
+            <a class="project-card tilt" data-tilt href="https://portfolio-maartendeklerk.netlify.app/assets/Brandbook%20Updog.pdf" target="_blank" rel="noopener">
+              <div class="project-card__media">
+                <picture>
+                  <source srcset="../assets/brandbook-updog.webp" type="image/webp" />
+                  <img src="../assets/brandbook-updog.jpg" alt="Updog brand book" loading="lazy" width="1100" height="619" />
+                </picture>
+                <div class="project-card__overlay"><span>View project
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+              </div>
+              <div class="project-card__body">
+                <div class="project-card__meta"><span class="project-card__cat">Design</span><span class="project-card__year">2024</span></div>
+                <h3>Brandbook Updog</h3>
+                <p>A complete brand guide with visual identity and guidelines for Updog.</p>
+                <div class="project-card__tags"><span class="tag">Branding</span><span class="tag">Identity</span></div>
+              </div>
+              <span class="tilt__glare" aria-hidden="true"></span>
+            </a>
+          </div>
+
+          <div class="reveal-wrap" data-category="web design" data-reveal="fade-up" data-delay="480">
+            <a class="project-card tilt" data-tilt href="https://fog-shirt-19121318.figma.site/" target="_blank" rel="noopener">
+              <div class="project-card__media">
+                <picture>
+                  <source srcset="../assets/kleingenot.webp" type="image/webp" />
+                  <img src="../assets/kleingenot.png" alt="Klein Genot website" loading="lazy" width="1100" height="673" />
+                </picture>
+                <div class="project-card__overlay"><span>View project
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+              </div>
+              <div class="project-card__body">
+                <div class="project-card__meta"><span class="project-card__cat">Web · Design</span><span class="project-card__year">2025</span></div>
+                <h3>Klein Genot</h3>
+                <p>A website built around its own atmosphere.</p>
+                <div class="project-card__tags"><span class="tag">Website</span><span class="tag">Design</span></div>
+              </div>
+              <span class="tilt__glare" aria-hidden="true"></span>
+            </a>
+          </div>
+
+          <div class="reveal-wrap" data-category="web" data-reveal="fade-up" data-delay="480">
+            <a class="project-card tilt" data-tilt href="https://repair-pager-88175855.figma.site/" target="_blank" rel="noopener">
+              <div class="project-card__media">
+                <picture>
+                  <source srcset="../assets/autogarage.webp" type="image/webp" />
+                  <img src="../assets/autogarage.png" alt="Auto garage website" loading="lazy" width="1100" height="656" />
+                </picture>
+                <div class="project-card__overlay"><span>View project
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+              </div>
+              <div class="project-card__body">
+                <div class="project-card__meta"><span class="project-card__cat">Web</span><span class="project-card__year">2025</span></div>
+                <h3>Auto Garage</h3>
+                <p>A functional design for an auto garage, focused on conversion and service.</p>
+                <div class="project-card__tags"><span class="tag">Website</span><span class="tag">Frontend</span></div>
+              </div>
+              <span class="tilt__glare" aria-hidden="true"></span>
+            </a>
+          </div>
+
+          <div class="reveal-wrap" data-category="web design" data-reveal="fade-up" data-delay="480">
+            <a class="project-card tilt" data-tilt href="https://emblem-most-96513317.figma.site/" target="_blank" rel="noopener">
+              <div class="project-card__media">
+                <picture>
+                  <source srcset="../assets/barbermo.webp" type="image/webp" />
+                  <img src="../assets/barbermo.png" alt="BarberMo website" loading="lazy" width="1100" height="684" />
+                </picture>
+                <div class="project-card__overlay"><span>View project
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+              </div>
+              <div class="project-card__body">
+                <div class="project-card__meta"><span class="project-card__cat">Web · Design</span><span class="project-card__year">2025</span></div>
+                <h3>BarberMo</h3>
+                <p>A trendy barbershop site with an eye for detail.</p>
+                <div class="project-card__tags"><span class="tag">Website</span><span class="tag">Design</span></div>
+              </div>
+              <span class="tilt__glare" aria-hidden="true"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta-banner" data-reveal="rise-up">
+          <div class="cta-banner__inner hero-stagger">
+            <h2>Your project here?</h2>
+            <p>I always have room for a new challenge. Let's talk.</p>
+            <a class="btn btn--ghost btn--lg" href="contact.html">Get in touch
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a class="wordmark" href="index.html"><span class="wordmark__dot" aria-hidden="true"></span>Maarten de Klerk</a>
+          <p>UI/UX Designer &amp; Web Developer from Nijswiller. I build websites of all shapes and sizes.</p>
+          <div class="footer__social">
+            <a class="icon-btn tip" data-tip="GitHub" href="https://github.com/MaartenDeKlerkPXL" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.2-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 4.6 18 4.9 18 4.9c.6 1.6.2 2.8.1 3.1.8.9 1.2 1.9 1.2 3.2 0 4.6-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg></a>
+            <a class="icon-btn tip" data-tip="LinkedIn" href="https://www.linkedin.com/in/maarten-deklerk0123/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33 0-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+            <a class="icon-btn tip" data-tip="Email" href="mailto:maarten.deklerk@student.pxl.be" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
+          </div>
+        </div>
+        <div>
+          <h3>Navigation</h3>
+          <div class="footer__links">
+            <a href="index.html">Home</a><a href="about.html">About</a><a href="projects.html">Projects</a><a href="contact.html">Contact</a>
+          </div>
+        </div>
+        <div>
+          <h3>Contact</h3>
+          <div class="footer__links">
+            <a href="mailto:maarten.deklerk@student.pxl.be">maarten.deklerk@student.pxl.be</a>
+            <a href="tel:+31644208005">+31 6 44208005</a>
+            <span style="color: var(--text-muted)">Nijswiller, Netherlands</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>Made with <span class="heart">❤</span> by Maarten de Klerk · © <span data-year>2025</span></span>
+        <span>UI/UX Designer &amp; Web Developer</span>
+      </div>
+    </div>
+  </footer>
+
+  <button class="scroll-top" id="scrollTop" aria-label="Back to top">
+    <svg class="scroll-top__ring" viewBox="0 0 44 44">
+      <defs>
+        <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#2563EB"/>
+          <stop offset="100%" stop-color="#60A5FA"/>
+        </linearGradient>
+      </defs>
+      <rect x="2" y="2" width="40" height="40" rx="10" class="ring-track"/>
+      <rect x="2" y="2" width="40" height="40" rx="10" class="ring-fill" id="scrollRingFill"/>
+    </svg>
+    <svg class="scroll-top__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script defer src="../claude%20skills/theme-toggle.js"></script>
+  <script defer src="../claude%20skills/cursor.js"></script>
+  <script defer src="../claude%20skills/magnetic.js"></script>
+  <script defer src="../claude%20skills/tilt.js"></script>
+  <script defer src="../claude%20skills/typewriter.js"></script>
+  <script defer src="../claude%20skills/reveal.js"></script>
+  <script defer src="../claude%20skills/counter.js"></script>
+  <script defer src="../claude%20skills/video-lightbox.js"></script>
+  <script defer src="../claude%20skills/page-transition.js"></script>
+  <script defer src="../ui/js/three-scene.js"></script>
+  <script defer src="../ui/js/animations.js"></script>
+  <script defer src="../ui/js/projects.js"></script>
+  <script defer src="../ui/js/main.js"></script>
+</body>
+</html>
