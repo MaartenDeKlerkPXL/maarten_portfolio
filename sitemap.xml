@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://maartendeklerk.nl/nl/index.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://maartendeklerk.nl/nl/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://maartendeklerk.nl/en/index.html"/>
+  </url>
+  <url>
+    <loc>https://maartendeklerk.nl/en/index.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://maartendeklerk.nl/nl/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://maartendeklerk.nl/en/index.html"/>
+  </url>
+  <url>
+    <loc>https://maartendeklerk.nl/nl/over.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://maartendeklerk.nl/nl/over.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://maartendeklerk.nl/en/about.html"/>
+  </url>
+  <url>
+    <loc>https://maartendeklerk.nl/en/about.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://maartendeklerk.nl/nl/over.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://maartendeklerk.nl/en/about.html"/>
+  </url>
+  <url>
+    <loc>https://maartendeklerk.nl/nl/projecten.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://maartendeklerk.nl/nl/projecten.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://maartendeklerk.nl/en/projects.html"/>
+  </url>
+  <url>
+    <loc>https://maartendeklerk.nl/en/projects.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://maartendeklerk.nl/nl/projecten.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://maartendeklerk.nl/en/projects.html"/>
+  </url>
+  <url>
+    <loc>https://maartendeklerk.nl/nl/contact.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://maartendeklerk.nl/nl/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://maartendeklerk.nl/en/contact.html"/>
+  </url>
+  <url>
+    <loc>https://maartendeklerk.nl/en/contact.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://maartendeklerk.nl/nl/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://maartendeklerk.nl/en/contact.html"/>
+  </url>
+</urlset>

@@ -1,0 +1,117 @@
+/* ============================================================
+   themes.css — Dark / Light design tokens (CSS custom properties)
+   Dark is the default. Light is applied via [data-theme="light"].
+   ============================================================ */
+
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Surfaces & background */
+  --bg: #0A0A0F;
+  --bg-2: #0B0D14;
+  --surface: #0F1621;
+  --surface-2: #0C1019;
+  --surface-3: #141E30;
+
+  /* Borders */
+  --border: rgba(37, 99, 235, 0.16);
+  --border-strong: rgba(59, 130, 246, 0.35);
+  --border-soft: rgba(148, 163, 184, 0.10);
+
+  /* Text */
+  --text: #F1F5F9;
+  --text-soft: #CBD5E1;
+  --text-muted: #94A3B8;
+  --text-faint: #7C8CA6; /* WCAG AA: ~5.7:1 on --bg (#0A0A0F), was #64748B at ~4.15:1 */
+
+  /* Accent */
+  --accent: #2563EB;
+  --accent-2: #3B82F6;
+  --accent-3: #60A5FA;
+  --accent-ink: #FFFFFF;
+
+  /* Glow & effects */
+  --glow: rgba(59, 130, 246, 0.55);
+  --glow-soft: rgba(37, 99, 235, 0.30);
+  --halo: rgba(37, 99, 235, 0.25);
+
+  /* Glass */
+  --glass-bg: rgba(15, 22, 33, 0.58);
+  --glass-bg-2: rgba(15, 20, 32, 0.65);
+  --glass-border: rgba(37, 99, 235, 0.22);
+
+  /* Navbar */
+  --nav-bg: rgba(10, 10, 15, 0.55);
+  --nav-bg-scrolled: rgba(10, 11, 18, 0.72);
+  --nav-border: rgba(37, 99, 235, 0.18);
+
+  /* Shadows */
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.35);
+  --shadow: 0 18px 50px -20px rgba(0, 0, 0, 0.65);
+  --shadow-glow: 0 14px 50px -12px rgba(37, 99, 235, 0.45);
+
+  /* Gradient mesh blobs */
+  --mesh-1: rgba(37, 99, 235, 0.35);
+  --mesh-2: rgba(59, 130, 246, 0.22);
+  --mesh-3: rgba(96, 165, 250, 0.16);
+  --mesh-4: rgba(29, 78, 216, 0.20);
+
+  /* Misc */
+  --success: #22C55E;
+  --error: #EF4444;
+  --grain-opacity: 0.05;
+  --hero-overlay: radial-gradient(120% 120% at 50% 0%, rgba(10,10,15,0) 38%, var(--bg) 78%);
+  --card-img-bg: #0b1120;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  --bg: #F8FAFF;
+  --bg-2: #EEF3FF;
+  --surface: #FFFFFF;
+  --surface-2: #F2F6FF;
+  --surface-3: #E9F0FF;
+
+  --border: rgba(37, 99, 235, 0.18);
+  --border-strong: rgba(37, 99, 235, 0.32);
+  --border-soft: rgba(15, 23, 42, 0.08);
+
+  --text: #0F172A;
+  --text-soft: #1E293B;
+  --text-muted: #475569;
+  --text-faint: #5B6B85; /* WCAG AA: ~5.2:1 on --bg (#F8FAFF), was #94A3B8 at ~2.4:1 */
+
+  --accent: #2563EB;
+  --accent-2: #3B82F6;
+  --accent-3: #1D4ED8;
+  --accent-ink: #FFFFFF;
+
+  --glow: rgba(37, 99, 235, 0.28);
+  --glow-soft: rgba(37, 99, 235, 0.16);
+  --halo: rgba(37, 99, 235, 0.16);
+
+  --glass-bg: rgba(255, 255, 255, 0.62);
+  --glass-bg-2: rgba(255, 255, 255, 0.78);
+  --glass-border: rgba(37, 99, 235, 0.18);
+
+  --nav-bg: rgba(248, 250, 255, 0.6);
+  --nav-bg-scrolled: rgba(248, 250, 255, 0.82);
+  --nav-border: rgba(37, 99, 235, 0.14);
+
+  --shadow-sm: 0 2px 10px rgba(37, 99, 235, 0.08);
+  --shadow: 0 22px 50px -24px rgba(37, 99, 235, 0.28);
+  --shadow-glow: 0 16px 44px -14px rgba(37, 99, 235, 0.30);
+
+  --mesh-1: rgba(37, 99, 235, 0.18);
+  --mesh-2: rgba(59, 130, 246, 0.14);
+  --mesh-3: rgba(96, 165, 250, 0.12);
+  --mesh-4: rgba(147, 197, 253, 0.20);
+
+  --success: #16A34A;
+  --error: #DC2626;
+  --grain-opacity: 0.035;
+  --hero-overlay: radial-gradient(120% 120% at 50% 0%, rgba(248,250,255,0) 40%, var(--bg) 80%);
+  --card-img-bg: #eaf0fb;
+}

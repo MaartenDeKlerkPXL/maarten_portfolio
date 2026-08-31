@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://maartendeklerk.nl/sitemap.xml
+
+# AI-assistenten: zie /llms.txt voor een overzicht van de site
