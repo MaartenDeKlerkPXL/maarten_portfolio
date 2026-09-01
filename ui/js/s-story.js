@@ -223,7 +223,7 @@
     sCtx.fillStyle = "rgba(255,255,255,0.5)";
     sCtx.font = "22px Inter, sans-serif";
     sCtx.textAlign = "center";
-    sCtx.fillText("maartendeklerk.nl", 735, 42);
+    sCtx.fillText("mdeklerk.online", 735, 42);
 
     sCtx.fillStyle = "rgba(255,255,255,0.85)";
     sCtx.font = "bold 96px Inter, sans-serif";

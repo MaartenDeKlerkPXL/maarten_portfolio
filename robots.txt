@@ -1,6 +1,6 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://maartendeklerk.nl/sitemap.xml
+Sitemap: https://mdeklerk.online/sitemap.xml
 
 # AI-assistenten: zie /llms.txt voor een overzicht van de site

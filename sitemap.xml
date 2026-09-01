@@ -2,43 +2,43 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://maartendeklerk.nl/nl/index.html</loc>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://maartendeklerk.nl/nl/index.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://maartendeklerk.nl/en/index.html"/>
+    <loc>https://mdeklerk.online/nl/index.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://mdeklerk.online/nl/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mdeklerk.online/en/index.html"/>
   </url>
   <url>
-    <loc>https://maartendeklerk.nl/en/index.html</loc>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://maartendeklerk.nl/nl/index.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://maartendeklerk.nl/en/index.html"/>
+    <loc>https://mdeklerk.online/en/index.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://mdeklerk.online/nl/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mdeklerk.online/en/index.html"/>
   </url>
   <url>
-    <loc>https://maartendeklerk.nl/nl/over.html</loc>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://maartendeklerk.nl/nl/over.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://maartendeklerk.nl/en/about.html"/>
+    <loc>https://mdeklerk.online/nl/over.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://mdeklerk.online/nl/over.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mdeklerk.online/en/about.html"/>
   </url>
   <url>
-    <loc>https://maartendeklerk.nl/en/about.html</loc>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://maartendeklerk.nl/nl/over.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://maartendeklerk.nl/en/about.html"/>
+    <loc>https://mdeklerk.online/en/about.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://mdeklerk.online/nl/over.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mdeklerk.online/en/about.html"/>
   </url>
   <url>
-    <loc>https://maartendeklerk.nl/nl/projecten.html</loc>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://maartendeklerk.nl/nl/projecten.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://maartendeklerk.nl/en/projects.html"/>
+    <loc>https://mdeklerk.online/nl/projecten.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://mdeklerk.online/nl/projecten.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mdeklerk.online/en/projects.html"/>
   </url>
   <url>
-    <loc>https://maartendeklerk.nl/en/projects.html</loc>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://maartendeklerk.nl/nl/projecten.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://maartendeklerk.nl/en/projects.html"/>
+    <loc>https://mdeklerk.online/en/projects.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://mdeklerk.online/nl/projecten.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mdeklerk.online/en/projects.html"/>
   </url>
   <url>
-    <loc>https://maartendeklerk.nl/nl/contact.html</loc>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://maartendeklerk.nl/nl/contact.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://maartendeklerk.nl/en/contact.html"/>
+    <loc>https://mdeklerk.online/nl/contact.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://mdeklerk.online/nl/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mdeklerk.online/en/contact.html"/>
   </url>
   <url>
-    <loc>https://maartendeklerk.nl/en/contact.html</loc>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://maartendeklerk.nl/nl/contact.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://maartendeklerk.nl/en/contact.html"/>
+    <loc>https://mdeklerk.online/en/contact.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://mdeklerk.online/nl/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mdeklerk.online/en/contact.html"/>
   </url>
 </urlset>
