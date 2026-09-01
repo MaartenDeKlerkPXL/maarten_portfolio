@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com https://unpkg.com 'sha256-bsIc6P//SoFYo1DS1od1VPsWhvFCRt+s/elRqEMHSZU=' 'sha256-uIMeAkedOb4EQZAS5jHqg7ON4BUxH87sZv10UgfMUUg='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; media-src 'self'; connect-src 'self'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="description" content="About Maarten de Klerk — UI/UX Designer & web developer from Nijswiller, studying at Hogeschool PXL. Frontend, design, motion and more." />
   <meta name="theme-color" content="#0A0A0F" />
   <title>About — Maarten de Klerk</title>
@@ -23,9 +25,7 @@
 
   <script>try{var t=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',t==='light'?'light':'dark');}catch(e){}</script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@600;700;800;900&family=DM+Sans:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../ui/css/fonts.css" />
 
   <link rel="stylesheet" href="../ui/css/themes.css" />
   <link rel="stylesheet" href="../ui/css/style.css" />
@@ -35,13 +35,13 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232563EB'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='18' font-weight='bold' fill='white' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E" />
 
   <!-- Three.js core (UMD build — werkt via file:// en http://) -->
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu" crossorigin="anonymous"></script>
 
   <!-- Three.js addons als losse scripts — moeten NA de core geladen worden
        (defer behoudt de documentvolgorde, dus dat blijft gegarandeerd) -->
-  <script defer src="https://unpkg.com/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-  <script defer src="https://unpkg.com/three@0.128.0/examples/js/environments/RoomEnvironment.js"></script>
-  <script defer src="https://unpkg.com/three@0.128.0/examples/js/lights/RectAreaLightUniformsLib.js"></script>
+  <script defer src="https://unpkg.com/three@0.128.0/examples/js/loaders/GLTFLoader.js" integrity="sha384-fljlqkjWlmSFjkESkQvm77heIZpoWmXEOzlCA7kOpGUH+95Zk0yGfQieWM2q136E" crossorigin="anonymous"></script>
+  <script defer src="https://unpkg.com/three@0.128.0/examples/js/environments/RoomEnvironment.js" integrity="sha384-UpJYDNQ/8wDmBlzh4lZ9VMbunag9yRAOGFiBWYVaf6/FCnrwc9qlto25EZVLhpph" crossorigin="anonymous"></script>
+  <script defer src="https://unpkg.com/three@0.128.0/examples/js/lights/RectAreaLightUniformsLib.js" integrity="sha384-f0w8ZriaESf/n239V7IQ/yRvdiq9iGIMrf/S4l/sBZRSvi2yZZ7P29qGbRAtajP7" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -412,7 +412,7 @@
         <div>
           <h3>Navigation</h3>
           <div class="footer__links">
-            <a href="index.html">Home</a><a href="about.html">About</a><a href="projects.html">Projects</a><a href="contact.html">Contact</a>
+            <a href="index.html">Home</a><a href="about.html">About</a><a href="projects.html">Projects</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a>
           </div>
         </div>
         <div>

@@ -41,4 +41,14 @@
     <xhtml:link rel="alternate" hreflang="nl" href="https://mdeklerk.online/nl/contact.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://mdeklerk.online/en/contact.html"/>
   </url>
+  <url>
+    <loc>https://mdeklerk.online/nl/privacy.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://mdeklerk.online/nl/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mdeklerk.online/en/privacy.html"/>
+  </url>
+  <url>
+    <loc>https://mdeklerk.online/en/privacy.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://mdeklerk.online/nl/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mdeklerk.online/en/privacy.html"/>
+  </url>
 </urlset>
