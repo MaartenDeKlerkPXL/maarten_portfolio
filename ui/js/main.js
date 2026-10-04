@@ -244,7 +244,7 @@
           var el = form.querySelector('[name="' + n + '"]');
           return el ? encodeURIComponent(el.value.trim()) : "";
         };
-        var to = form.getAttribute("data-mailto") || "maarten.deklerk@student.pxl.be";
+        var to = form.getAttribute("data-mailto") || "maartendeklerk2002@gmail.com";
         var subject = get("subject") || (isEN ? "Portfolio%20message" : "Bericht%20via%20portfolio");
         var body =
           (isEN ? "Name" : "Naam") + ": " + get("name") +

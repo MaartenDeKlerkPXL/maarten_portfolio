@@ -7,13 +7,24 @@
 (function () {
   "use strict";
 
+  /* Zonder 3D-laptop blijven de verhaalkaarten anders onzichtbaar (ze
+     starten op opacity 0): toon ze dan gewoon, met de tellers op hun
+     eindwaarde zoals die al in de HTML staat. */
+  function showCardsWithoutStory() {
+    document.querySelectorAll("[data-card]").forEach(function (card) {
+      card.classList.add("is-visible");
+    });
+  }
+
   /* Wacht tot THREE geladen is — veiligheidscheck */
   if (typeof THREE === "undefined") {
     console.warn("s-story.js: THREE is niet geladen. Voeg three.min.js toe vóór s-story.js.");
+    showCardsWithoutStory();
     return;
   }
   if (typeof THREE.GLTFLoader === "undefined") {
     console.warn("s-story.js: THREE.GLTFLoader ontbreekt. Voeg GLTFLoader.js toe.");
+    showCardsWithoutStory();
     return;
   }
 
@@ -29,7 +40,15 @@
   var svgPath = qs("#sPath");
   var cards   = qsa("[data-card]");
   var canvas  = qs("#s-laptop-canvas");
-  if (!section || !canvas) return;
+  if (!section || !canvas) { showCardsWithoutStory(); return; }
+
+  /* Tellers staan in de HTML op hun eindwaarde; alleen als er geanimeerd
+     wordt eerst naar 0, zodat het optellen bij het verschijnen zichtbaar is */
+  if (!REDUCE) {
+    qsa("[data-counter]").forEach(function (el) {
+      el.textContent = "0" + (el.dataset.suffix || "");
+    });
+  }
 
   /* ===========================================================
      KLEUR-THEMA
@@ -457,6 +476,7 @@
     el.dataset.counted = "1";
     var target   = parseInt(el.dataset.target, 10);
     var suffix   = el.dataset.suffix || "";
+    if (REDUCE) { el.textContent = target + suffix; return; }
     var duration = 1600;
     var start    = null;
     function ease(t) { return 1 - Math.pow(1 - t, 3); }

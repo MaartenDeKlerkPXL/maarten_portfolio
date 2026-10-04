@@ -46,6 +46,14 @@
       return;
     }
 
+    // De HTML bevat de eindwaarde (klopt zonder JS); alleen als er echt
+    // geanimeerd wordt, eerst terug naar 0 zodat het optellen zichtbaar is.
+    if (!reducedMotion()) {
+      els.forEach(function (el) {
+        el.textContent = (el.getAttribute("data-prefix") || "") + "0" + (el.getAttribute("data-suffix") || "");
+      });
+    }
+
     var io = new IntersectionObserver(
       function (entries, obs) {
         entries.forEach(function (entry) {
