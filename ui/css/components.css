@@ -752,6 +752,236 @@ body.menu-open .mobile-menu__meta { opacity: 1; }
 .project-card__body h3 { font-size: 1.3rem; }
 .project-card__body p { font-size: 0.95rem; color: var(--text-muted); }
 .project-card__tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
+
+/* ---------- Uitklappanelen met projectbeschrijving (project-details.js) ----------
+   Desktop: het paneel ligt absoluut naast de kaart, even hoog, en schuift via
+   clip-path vanachter de kaart uit over de buurkaart. De grid zelf verschuift
+   nooit. Richting (data-dir) en verschuiving (.is-shifted) zet de JS bij elke
+   opening op basis van de werkelijke kolompositie. Touch of één kolom:
+   .is-details-accordion op de grid, het paneel klapt dan onder de kaart open. */
+.reveal-wrap.has-details {
+  position: relative;
+  flex-direction: column;
+  --details-gap: 24px;
+  --details-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --details-dur: 0.35s;
+}
+.reveal-wrap.has-details.is-details-open,
+.reveal-wrap.has-details.is-details-closing { z-index: 20; }
+.project-unit {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  /* Sluiten: eerst klapt het paneel in, daarna schuift de kaart terug */
+  transition: transform var(--details-dur) var(--details-ease) var(--details-dur);
+}
+.project-unit > .project-card { z-index: 1; }
+.is-details-open .project-unit { transition-delay: 0s; }
+.is-details-open.is-shifted .project-unit {
+  transform: translateX(calc(-100% - var(--details-gap)));
+}
+
+/* Dicht en zonder richting ligt het paneel precies achter de kaart, zodat
+   het nooit buiten de grid of de viewport uitsteekt (geen horizontale scroll) */
+.project-details {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  display: flex;
+  border-radius: 0 14px 14px 0;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-left: 0;
+  box-shadow: var(--shadow);
+  visibility: hidden;
+  clip-path: inset(0 100% 0 0 round 0 14px 14px 0);
+  transition:
+    clip-path var(--details-dur) var(--details-ease),
+    visibility 0s linear var(--details-dur);
+}
+.project-details[data-dir="right"] {
+  left: 100%;
+  width: calc(100% + var(--details-gap));
+}
+.project-details[data-dir="left"] {
+  left: auto;
+  right: 100%;
+  width: calc(100% + var(--details-gap));
+  border-radius: 14px 0 0 14px;
+  border-left: 1px solid var(--border-strong);
+  border-right: 0;
+  clip-path: inset(0 0 0 100% round 14px 0 0 14px);
+}
+.is-details-open .project-details {
+  visibility: visible;
+  clip-path: inset(0 0 0 0 round 0 14px 14px 0);
+  transition:
+    clip-path var(--details-dur) var(--details-ease),
+    visibility 0s linear 0s;
+}
+.is-details-open .project-details[data-dir="left"] { clip-path: inset(0 0 0 0 round 14px 0 0 14px); }
+/* Middelste kolom: eerst schuift de kaart, daarna klapt het paneel uit */
+.is-details-open.is-shifted .project-details { transition-delay: var(--details-dur), 0s; }
+
+/* Kaart en paneel lezen samen als één verbrede kaart */
+.is-details-open .project-card,
+.is-details-closing .project-card { border-color: var(--border-strong); box-shadow: var(--shadow); }
+.is-details-open .project-card[data-dir="right"],
+.is-details-closing .project-card[data-dir="right"] {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right-color: transparent;
+}
+.is-details-open .project-card[data-dir="left"],
+.is-details-closing .project-card[data-dir="left"] {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left-color: transparent;
+}
+
+.project-details__inner {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+}
+.project-details__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  margin: 0;
+  padding: 20px var(--sp-3) var(--sp-1);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  display: grid;
+  align-content: start;
+  gap: 12px;
+}
+/* Past de tekst niet, dan zachte vervaging onderaan als scrollhint */
+.project-details.is-overflowing .project-details__body {
+  -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - 28px), transparent);
+  mask-image: linear-gradient(180deg, #000 calc(100% - 28px), transparent);
+}
+.project-details__body:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.project-details__item dt {
+  font-family: var(--font-head);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-3);
+  margin-bottom: 4px;
+}
+.project-details__item dd {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.48;
+  color: var(--text-soft);
+}
+.project-details__foot {
+  flex: 0 0 auto;
+  padding: 14px var(--sp-3) 18px;
+  border-top: 1px solid var(--border-soft);
+}
+.project-details__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--accent-3);
+  transition: gap 0.3s var(--ease), color 0.3s var(--ease);
+}
+.project-details__link:hover { gap: 12px; color: var(--text); }
+.project-details__link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+/* "Lees meer"-knop: alleen in accordeonmodus (touch of één kolom) */
+.project-details__toggle {
+  margin-top: 10px;
+  width: 100%;
+  padding: 11px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-soft);
+  font: inherit;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: border-color 0.3s var(--ease), color 0.3s var(--ease);
+}
+.project-details__toggle:hover { border-color: var(--border-strong); color: var(--text); }
+.project-details__toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.is-details-accordion .project-unit { flex-direction: column; transform: none; transition: none; }
+.is-details-accordion .project-details {
+  position: static;
+  width: auto;
+  display: grid;
+  grid-template-rows: 0fr;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  clip-path: none;
+  visibility: hidden;
+  transition:
+    grid-template-rows var(--details-dur) var(--details-ease),
+    visibility 0s linear var(--details-dur);
+}
+.is-details-accordion .is-expanded .project-details {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition:
+    grid-template-rows var(--details-dur) var(--details-ease),
+    visibility 0s linear 0s;
+}
+.is-details-accordion .project-details__inner { overflow: hidden; }
+.is-details-accordion .project-details__body,
+.is-details-accordion .project-details__foot {
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+.is-details-accordion .project-details__body {
+  margin-top: 10px;
+  overflow: visible;
+  border-bottom: 0;
+  border-radius: 14px 14px 0 0;
+}
+.is-details-accordion .project-details__foot { border-top: 0; border-radius: 0 0 14px 14px; }
+
+/* Geen transities tijdens direct sluiten (filter, resize) */
+.no-details-anim .project-unit,
+.no-details-anim .project-details { transition: none !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  /* Er schuift niets: het paneel verschijnt alleen met een korte fade */
+  .project-unit { transition: none; }
+  .project-details,
+  .project-details[data-dir="left"],
+  .is-details-open .project-details,
+  .is-details-open .project-details[data-dir="left"] {
+    clip-path: none;
+    opacity: 0;
+    transition: opacity 0.15s linear, visibility 0s linear 0.15s;
+  }
+  .is-details-open .project-details,
+  .is-details-open .project-details[data-dir="left"] {
+    opacity: 1;
+    transition: opacity 0.15s linear, visibility 0s linear 0s;
+  }
+  .is-details-open.is-shifted .project-details { transition-delay: 0s; }
+  .is-details-open.is-shifted .project-unit { transform: none; }
+  .is-details-accordion .project-details,
+  .is-details-accordion .is-expanded .project-details { opacity: 1; transition: none; }
+}
 .tag {
   font-size: 0.72rem;
   font-weight: 600;

@@ -311,6 +311,7 @@
     safe(window.initLiveStats);
     safe(window.initAnimations);
     safe(window.initProjectFilter);
+    safe(window.initProjectDetails);
     safe(window.initVideoLightbox);
     safe(window.initContactForm);
   });

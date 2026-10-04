@@ -1,13 +1,21 @@
 # HANDOFF — Website Maarten de Klerk
 
-**Laatst bijgewerkt:** 2026-08-31 (avond)
+**Laatst bijgewerkt:** 2026-10-04
 
-## Laatste sessie-aanvulling
+## Sessie-aanvulling 2026-10-04: uitklappanelen op de projectenpagina
+- **Wat**: tien projectkaarten (Mr. Cookies, Furnilux, JPJ Fotografie, Spirithorses, Zeecontainers Concept, Rijschool Will, Campus Karting App, Campus Karting Website, IBE Motion, BrightNews) hebben een uitgebreide beschrijving in een paneel, plus een nieuwe korte kaarttekst. Teksten letterlijk van Maarten, NL en EN. De overige kaarten zijn ongewijzigd. Klikken op de kaart opent nog steeds de live site of het Figma-prototype; onderaan het paneel staat een link met dezelfde tekst als de overlay.
+- **Bestanden**: `nl/projecten.html` en `en/projects.html` (per kaart: `.reveal-wrap.has-details` > `.project-unit` met kaartlink + `.project-details`-paneel, en daarbuiten de knop `.project-details__toggle`), `ui/css/components.css` (blok "Uitklappanelen" direct na `.project-card__tags`), nieuw script `ui/js/project-details.js` (geladen op beide projectenpagina's, gestart via `initProjectDetails` in `ui/js/main.js`), en `claude skills/tilt.js` (pauzeert via `.is-tilt-paused` en reset via het event `tilt:reset`).
+- **Kolompositie**: bij elke opening opnieuw bepaald uit `getBoundingClientRect` van de kaart ten opzichte van de grid, met het aantal kolommen uit de berekende `grid-template-columns`. Nooit `nth-child`, dus het klopt ook na filteren en bij elke schermbreedte. Linkerkolom: paneel naar rechts. Rechterkolom: paneel naar links. Middenkolom: de kaart schuift één kolom naar links (`.is-shifted`) en het paneel klapt daarna naar rechts uit. Dicht ligt het paneel exact achter de kaart, zodat er nooit horizontale scroll ontstaat. Hover-delay 120 ms in, 200 ms uit; er is steeds maar één paneel open. Een filterklik of resize sluit direct.
+- **Toegankelijkheid**: paneel opent bij zichtbare toetsenbordfocus, Escape sluit en laat de focus op de kaart. De beschrijving staat altijd in de DOM en hangt via `aria-describedby` aan de kaartlink. Past de tekst niet in het paneel (bij de huidige teksten vrijwel altijd), dan scrollt het paneel zelf, met een vervaging onderaan en `tabindex="0"` op het scrollgebied.
+- **Touch en één kolom**: bij `(hover: none)` of één kolom krijgt de grid `.is-details-accordion`. Dan staat onder elke kaart de knop "Lees meer" / "Read more" (buiten de `<a>`), die het paneel als accordeon onder de kaart openklapt.
+- **Reduced motion**: er schuift niets. De middenkolom klapt dan naar links uit in plaats van te verschuiven, en het paneel verschijnt met alleen een fade van 0,15 s.
+
+## Eerdere sessie-aanvulling (2026-08-31)
 - **Sticky-release gefixt**: de JS-pin (checkLaptopStop/is-stopped) is volledig vervallen. Oorzaak van de verspringing: `margin-bottom: -100vh` op `.s-laptop-stage` maakte de marge-box 0 hoog waardoor CSS-sticky nooit losliet; die marge is verhuisd naar `margin-top: -100vh` op `.s-beats-wrap` (layout-equivalent) zodat de browser de sticky nu zelf vloeiend loslaat na beat 06. Extra lift-fase (88–98%) in de timeline blendt de snelheidsovergang.
 - **NL-copy verbeterd** (door Erik aangevinkt): "Aan de slag." (was "Laten we bouwen."), "Waar ik goed in ben" (was "Wat ik op tafel leg"), "animaties op maat", "Laten we kennismaken.", "heats boeken", "Ontwerp én development onder één dak", "nergens aan vast". Kop "Jouw project hier?" bewust behouden. EN-pagina's ongewijzigd (Engels is de bron).
 
 ## Wat dit is
-Statische portfolio-website voor Maarten de Klerk (UI/UX-designer & webdeveloper, student Hogeschool PXL). Vanilla HTML/CSS/JS, geen build-stap, geen git-repo. Tweetalig: NL onder `nl/` (default), EN onder `en/`. Gedeelde CSS in `ui/css/`, JS in `ui/js/` en `claude skills/`, media in `assets/`. Beoogd domein: **mdeklerk.online** (resolveert nog niet; hosting nog niet ingericht).
+Statische portfolio-website voor Maarten de Klerk (UI/UX-designer & webdeveloper, student Digitale Vormgeving aan Hogeschool PXL). Vanilla HTML/CSS/JS, geen build-stap. Git-repo: `MaartenDeKlerkPXL/maarten_portfolio` (pushen als dat GitHub-account). Tweetalig: NL onder `nl/` (default), EN onder `en/`. Gedeelde CSS in `ui/css/`, JS in `ui/js/` en `claude skills/`, media in `assets/`. Domein: **mdeklerk.online**, live via GitHub Pages (CNAME in de repo).
 
 ## Stand van zaken (sessie 2026-08-31)
 Grote onderhoudsronde afgerond:
@@ -24,9 +32,14 @@ Grote onderhoudsronde afgerond:
 - Browser-pane-screenshots kunnen zwart zijn als de pane hidden is; Chrome-tabs stellen video-laden en reveal-animaties uit zolang de tab niet zichtbaar is (geen site-bug).
 
 ## Open punten
-- Hosting + DNS voor mdeklerk.online inrichten; daarna canonical/OG-URL's verifiëren.
+- Bij Spirithorses, Zeecontainers, Rijschool Will, IBE Motion en BrightNews ontbreekt nog een "Volgende keer". Maarten levert die eventueel aan.
+- De BrightNews-kaart linkt naar een binnenkort-pagina tot de lancering.
+- Maarten checkt nog of Rijschool Will een klant is geworden. Zo ja, dan gaat "demo" uit de tekst.
+- Maarten checkt zijn rol bij de Campus Karting-website.
+- De paneelteksten zijn langer dan wat in een paneel van kaarthoogte past, dus de panelen scrollen. Kortere teksten zouden dat oplossen.
 - Beschrijvingen videokaarten laten bevestigen door Maarten.
-- Nog uit de audit, laag prio: unpkg/cdnjs-scripts eventueel self-hosten; og:image is nu de pasfoto (700×641) — een echte 1200×630-banner zou mooier zijn.
+- Laag prio: unpkg/cdnjs-scripts (Three.js) eventueel self-hosten.
+- (Afgerond: de site staat live op mdeklerk.online via GitHub Pages, en de og:image is een echte 1200×630-banner.)
 
 ## Eerste bericht volgende sessie
 "Lees 'Website Maarten de Klerk/HANDOFF.md' en ga verder."

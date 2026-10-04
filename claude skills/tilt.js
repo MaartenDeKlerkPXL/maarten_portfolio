@@ -43,6 +43,8 @@
     function kick() { if (!raf) raf = requestAnimationFrame(animate); }
 
     el.addEventListener("mousemove", function (e) {
+      // Uitgeklapte projectkaart (project-details.js): geen tilt
+      if (el.classList.contains("is-tilt-paused")) return;
       var r = el.getBoundingClientRect();
       var px = (e.clientX - r.left) / r.width;   // 0..1
       var py = (e.clientY - r.top) / r.height;   // 0..1
@@ -54,6 +56,7 @@
     });
 
     el.addEventListener("mouseenter", function () {
+      if (el.classList.contains("is-tilt-paused")) return;
       el.classList.add("is-tilting");
     });
 
@@ -61,6 +64,14 @@
       tgX = 0; tgY = 0;
       el.classList.remove("is-tilting");
       kick();
+    });
+
+    // Direct terug naar de rustpositie, bv. als de kaart uitklapt
+    el.addEventListener("tilt:reset", function () {
+      if (raf) { cancelAnimationFrame(raf); raf = null; }
+      tgX = tgY = curX = curY = 0;
+      el.classList.remove("is-tilting");
+      el.style.transform = "";
     });
   }
 
