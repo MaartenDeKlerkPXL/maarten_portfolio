@@ -783,91 +783,75 @@ body.menu-open .mobile-menu__meta { opacity: 1; }
 }
 
 /* Dicht en zonder richting ligt het paneel precies achter de kaart, zodat
-   het nooit buiten de grid of de viewport uitsteekt (geen horizontale scroll) */
+   het nooit buiten de grid of de viewport uitsteekt (geen horizontale scroll).
+   Open begint het paneel --details-overlap onder de kaart: zo lopen kaart en
+   paneel naadloos in elkaar over als één verbrede kaart. Het is minstens even
+   hoog als de kaart en groeit mee als de tekst langer is, zodat alles leesbaar
+   blijft zonder te scrollen. --details-span (1 of 2 kaarten) zet de JS. */
 .project-details {
+  --details-overlap: 14px;
   position: absolute;
   top: 0;
-  bottom: 0;
   left: 0;
   z-index: 0;
   width: 100%;
+  min-height: 100%;
   display: flex;
-  border-radius: 0 14px 14px 0;
+  border-radius: 14px;
   background: var(--surface);
   border: 1px solid var(--border-strong);
-  border-left: 0;
   box-shadow: var(--shadow);
   visibility: hidden;
-  clip-path: inset(0 100% 0 0 round 0 14px 14px 0);
+  clip-path: inset(0 100% 0 0 round 14px);
   transition:
     clip-path var(--details-dur) var(--details-ease),
     visibility 0s linear var(--details-dur);
 }
+.project-details[data-dir] {
+  width: calc(var(--details-span, 1) * (100% + var(--details-gap)) + var(--details-overlap));
+}
 .project-details[data-dir="right"] {
-  left: 100%;
-  width: calc(100% + var(--details-gap));
+  left: calc(100% - var(--details-overlap));
+  padding-left: var(--details-overlap);
 }
 .project-details[data-dir="left"] {
   left: auto;
-  right: 100%;
-  width: calc(100% + var(--details-gap));
-  border-radius: 14px 0 0 14px;
-  border-left: 1px solid var(--border-strong);
-  border-right: 0;
-  clip-path: inset(0 0 0 100% round 14px 0 0 14px);
+  right: calc(100% - var(--details-overlap));
+  padding-right: var(--details-overlap);
+  clip-path: inset(0 0 0 100% round 14px);
 }
-.is-details-open .project-details {
+.is-details-open .project-details,
+.is-details-open .project-details[data-dir="left"] {
   visibility: visible;
-  clip-path: inset(0 0 0 0 round 0 14px 14px 0);
+  clip-path: inset(0 0 0 0 round 14px);
   transition:
     clip-path var(--details-dur) var(--details-ease),
     visibility 0s linear 0s;
 }
-.is-details-open .project-details[data-dir="left"] { clip-path: inset(0 0 0 0 round 14px 0 0 14px); }
 /* Middelste kolom: eerst schuift de kaart, daarna klapt het paneel uit */
 .is-details-open.is-shifted .project-details { transition-delay: var(--details-dur), 0s; }
 
 /* Kaart en paneel lezen samen als één verbrede kaart */
 .is-details-open .project-card,
 .is-details-closing .project-card { border-color: var(--border-strong); box-shadow: var(--shadow); }
-.is-details-open .project-card[data-dir="right"],
-.is-details-closing .project-card[data-dir="right"] {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  border-right-color: transparent;
-}
-.is-details-open .project-card[data-dir="left"],
-.is-details-closing .project-card[data-dir="left"] {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  border-left-color: transparent;
-}
 
 .project-details__inner {
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
   min-width: 0;
-  min-height: 0;
 }
 .project-details__body {
   flex: 1 1 auto;
-  min-height: 0;
   margin: 0;
-  padding: 20px var(--sp-3) var(--sp-1);
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  scrollbar-width: thin;
-  display: grid;
-  align-content: start;
-  gap: 12px;
+  padding: 20px var(--sp-3) 6px;
 }
-/* Past de tekst niet, dan zachte vervaging onderaan als scrollhint */
-.project-details.is-overflowing .project-details__body {
-  -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - 28px), transparent);
-  mask-image: linear-gradient(180deg, #000 calc(100% - 28px), transparent);
+.project-details__item { break-inside: avoid; margin-bottom: 14px; }
+/* Twee kaarten breed: tekst in twee kolommen, zodat regels leesbaar kort blijven */
+.project-details[data-span="2"] .project-details__body {
+  columns: 2;
+  column-gap: 32px;
 }
-.project-details__body:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 .project-details__item dt {
   font-family: var(--font-head);
   font-size: 0.7rem;
@@ -920,10 +904,13 @@ body.menu-open .mobile-menu__meta { opacity: 1; }
 .project-details__toggle:hover { border-color: var(--border-strong); color: var(--text); }
 .project-details__toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-.is-details-accordion .project-unit { flex-direction: column; transform: none; transition: none; }
+.is-details-accordion .project-unit { flex: 0 0 auto; flex-direction: column; transform: none; transition: none; }
 .is-details-accordion .project-details {
   position: static;
+  flex: none; /* nooit laten krimpen: de hele tekst moet zichtbaar zijn */
   width: auto;
+  min-height: 0;
+  padding: 0;
   display: grid;
   grid-template-rows: 0fr;
   border: 0;

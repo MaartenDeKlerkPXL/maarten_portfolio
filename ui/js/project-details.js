@@ -10,11 +10,14 @@
    de kolom van de kaart opnieuw bepaald uit getBoundingClientRect, nooit
    uit nth-child, omdat het aantal kolommen wisselt met de schermbreedte
    en met het filter.
+     Vanaf drie kolommen is het paneel twee kaarten breed, bij twee
+     kolommen één kaart. Het paneel groeit in hoogte mee met de tekst.
      linkerkolom   → paneel klapt naar rechts uit
      rechterkolom  → paneel klapt naar links uit
      middenkolom   → kaart schuift één kolom naar links, paneel klapt
                      daarna naar rechts uit op de oude plek
-                     (bij reduced motion: paneel naar links, niets schuift)
+                     (bij reduced motion schuift niets: dan een paneel van
+                     één kaart breed naar links)
    Accordeonmodus (touch of één kolom): de knop klapt het paneel onder
    de kaart open.
    Exposes: window.initProjectDetails()
@@ -41,7 +44,6 @@
       return {
         card: wrap.querySelector(".project-card"),
         panel: wrap.querySelector("[data-details]"),
-        body: wrap.querySelector(".project-details__body"),
         toggle: wrap.querySelector(".project-details__toggle")
       };
     }
@@ -53,35 +55,36 @@
       return { cols: cols, gap: gap };
     }
 
-    /* Kolom van de kaart in zijn rij, uit de werkelijke positie */
+    /* Kolom van de kaart in zijn rij, uit de werkelijke positie; daaruit
+       volgen richting, breedte (span) en of de kaart eerst moet schuiven.
+       Het paneel past altijd binnen de grid. */
     function layoutFor(wrap) {
       var m = gridMetrics();
       var g = grid.getBoundingClientRect();
       var r = wrap.getBoundingClientRect();
       var colW = (g.width - m.gap * (m.cols - 1)) / m.cols;
       var col = Math.round((r.left + r.width / 2 - g.left - colW / 2) / (colW + m.gap));
-      col = Math.max(0, Math.min(m.cols - 1, col));
+      var last = m.cols - 1;
+      col = Math.max(0, Math.min(last, col));
+      var span = m.cols >= 3 ? 2 : 1;
       var dir = "right", shifted = false;
-      if (col === m.cols - 1) dir = "left";
-      else if (col > 0) {
-        if (reduceQuery.matches) dir = "left";
-        else shifted = true;
+      if (col + span <= last) {
+        dir = "right";
+      } else if (col - span >= 0) {
+        dir = "left";
+      } else if (!reduceQuery.matches && col - 1 >= 0 && col - 1 + span <= last) {
+        shifted = true; // middenkolom: kaart één kolom naar links, paneel rechts
+      } else {
+        span = 1; // bv. reduced motion in de middenkolom: niets schuift
+        dir = col > 0 ? "left" : "right";
       }
-      return { dir: dir, shifted: shifted, gap: m.gap };
+      return { dir: dir, span: span, shifted: shifted, gap: m.gap };
     }
 
     function setTiltPaused(card, paused) {
       if (!card) return;
       card.classList.toggle("is-tilt-paused", paused);
       if (paused) card.dispatchEvent(new CustomEvent("tilt:reset"));
-    }
-
-    function markOverflow(p) {
-      var over = p.body.scrollHeight > p.body.clientHeight + 1;
-      p.panel.classList.toggle("is-overflowing", over);
-      // Scrollbaar deel ook met het toetsenbord bereikbaar maken
-      if (over) p.body.setAttribute("tabindex", "0");
-      else p.body.removeAttribute("tabindex");
     }
 
     function clearTimers(wrap) {
@@ -98,16 +101,16 @@
       var p = parts(wrap);
       var lay = layoutFor(wrap);
       wrap.style.setProperty("--details-gap", lay.gap + "px");
+      wrap.style.setProperty("--details-span", String(lay.span));
       wrap.classList.remove("is-details-closing");
       p.panel.setAttribute("data-dir", lay.dir);
-      p.card.setAttribute("data-dir", lay.dir);
+      p.panel.setAttribute("data-span", String(lay.span));
       wrap.classList.toggle("is-shifted", lay.shifted);
       setTiltPaused(p.card, true);
       // Reflow zodat de startpositie (dicht) eerst wordt toegepast
       void p.panel.offsetWidth;
       wrap.classList.add("is-details-open");
       current = wrap;
-      markOverflow(p);
     }
 
     function close(wrap, instant) {
@@ -123,8 +126,7 @@
       function finish() {
         wrap.classList.remove("is-details-closing", "no-details-anim");
         p.panel.removeAttribute("data-dir");
-        p.card.removeAttribute("data-dir");
-        p.panel.classList.remove("is-overflowing");
+        p.panel.removeAttribute("data-span");
       }
       if (instant || reduceQuery.matches) {
         void wrap.offsetWidth;
