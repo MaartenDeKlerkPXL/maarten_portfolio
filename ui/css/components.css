@@ -773,12 +773,11 @@ body.menu-open .mobile-menu__meta { opacity: 1; }
   display: flex;
   flex: 1 1 auto;
   min-width: 0;
-  /* Sluiten: eerst klapt het paneel in, daarna schuift de kaart terug */
-  transition: transform var(--details-dur) var(--details-ease) var(--details-dur);
+  /* Volgorde bij sluiten (paneel in, dan kaart terug) regelt de JS */
+  transition: transform var(--details-dur) var(--details-ease);
 }
 .project-unit > .project-card { z-index: 1; }
-.is-details-open .project-unit { transition-delay: 0s; }
-.is-details-open.is-shifted .project-unit {
+.is-shifted .project-unit {
   transform: translateX(calc(-100% - var(--details-gap)));
 }
 
@@ -965,7 +964,7 @@ body.menu-open .mobile-menu__meta { opacity: 1; }
     transition: opacity 0.15s linear, visibility 0s linear 0s;
   }
   .is-details-open.is-shifted .project-details { transition-delay: 0s; }
-  .is-details-open.is-shifted .project-unit { transform: none; }
+  .is-shifted .project-unit { transform: none; }
   .is-details-accordion .project-details,
   .is-details-accordion .is-expanded .project-details { opacity: 1; transition: none; }
 }

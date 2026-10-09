@@ -118,24 +118,38 @@
       if (!wrap.classList.contains("is-details-open") && !wrap.classList.contains("is-details-closing")) return;
       var p = parts(wrap);
       var wasShifted = wrap.classList.contains("is-shifted");
-      if (instant) wrap.classList.add("no-details-anim");
-      wrap.classList.remove("is-details-open", "is-shifted");
       if (current === wrap) current = null;
       setTiltPaused(p.card, false);
 
-      function finish() {
-        wrap.classList.remove("is-details-closing", "no-details-anim");
+      function parkPanel() {
+        // Paneel terug achter de kaart, zodat het nergens buiten de grid steekt
         p.panel.removeAttribute("data-dir");
         p.panel.removeAttribute("data-span");
       }
+      function finish() {
+        wrap.classList.remove("is-details-closing", "is-shifted", "no-details-anim");
+        parkPanel();
+      }
       if (instant || reduceQuery.matches) {
+        if (instant) wrap.classList.add("no-details-anim");
+        wrap.classList.remove("is-details-open");
         void wrap.offsetWidth;
         finish();
         return;
       }
-      // Panel klapt eerst in; een verschoven kaart schuift daarna terug
+      // Eerst klapt het paneel in; daarna pas schuift een verschoven kaart
+      // terug, met het paneel al achter de kaart geparkeerd
       wrap.classList.add("is-details-closing");
-      wrap._detailsEndT = setTimeout(finish, wasShifted ? DURATION * 2 : DURATION);
+      wrap.classList.remove("is-details-open");
+      if (!wasShifted) {
+        wrap._detailsEndT = setTimeout(finish, DURATION);
+        return;
+      }
+      wrap._detailsEndT = setTimeout(function () {
+        parkPanel();
+        wrap.classList.remove("is-shifted");
+        wrap._detailsEndT = setTimeout(finish, DURATION);
+      }, DURATION);
     }
 
     function closeAllInstant() {

@@ -1,6 +1,12 @@
 # HANDOFF — Website Maarten de Klerk
 
-**Laatst bijgewerkt:** 2026-10-04
+**Laatst bijgewerkt:** 2026-10-09
+
+## Sessie-aanvulling 2026-10-09
+- **Agro Tycoon 2.0** toegevoegd bovenaan de projecten (NL + EN), met uitklappaneel (Idee, Spel, Techniek), link naar https://agro.mdeklerk.online/ en screenshot `assets/agro-tycoon.(webp|jpg)` (headless Chrome, 1440 px breed, uitleg overgeslagen, verkleind naar 1100 px). Eigen project; de paneeltekst is door Claude geschreven op basis van de README van `MaartenDeKlerkPXL/agro-tycoon2.0` en de game zelf.
+- **Verwijderd**: Einklang, T-Dakwerken, Klein Genot, Autogarage en BarberMo (kaarten en afbeeldingen). Er staan nu 15 projecten; de vaste terugvalwaarde van de projectteller staat op 15.
+- **Uitklappanelen**: bij sluiten van een verschoven middenkaart klapt eerst het paneel in, daarna wordt het achter de kaart geparkeerd en pas dan schuift de kaart terug. Zo steekt het paneel nooit tijdelijk buiten de grid.
+
 
 ## Sessie-aanvulling 2026-10-04: uitklappanelen op de projectenpagina
 - **Wat**: tien projectkaarten (Mr. Cookies, Furnilux, JPJ Fotografie, Spirithorses, Zeecontainers Concept, Rijschool Will, Campus Karting App, Campus Karting Website, IBE Motion, BrightNews) hebben een uitgebreide beschrijving in een paneel, plus een nieuwe korte kaarttekst. Teksten letterlijk van Maarten, NL en EN. De overige kaarten zijn ongewijzigd. Klikken op de kaart opent nog steeds de live site of het Figma-prototype; onderaan het paneel staat een link met dezelfde tekst als de overlay.
@@ -32,7 +38,8 @@ Grote onderhoudsronde afgerond:
 - Browser-pane-screenshots kunnen zwart zijn als de pane hidden is; Chrome-tabs stellen video-laden en reveal-animaties uit zolang de tab niet zichtbaar is (geen site-bug).
 
 ## Open punten
-- Bij Spirithorses, Zeecontainers, Rijschool Will, IBE Motion en BrightNews ontbreekt nog een "Volgende keer". Maarten levert die eventueel aan.
+- Bij Spirithorses, Zeecontainers, Rijschool Will, IBE Motion, BrightNews en Agro Tycoon ontbreekt nog een "Volgende keer". Maarten levert die eventueel aan.
+- Maarten checkt de door Claude geschreven paneeltekst van Agro Tycoon.
 - De BrightNews-kaart linkt naar een binnenkort-pagina tot de lancering.
 - Maarten checkt nog of Rijschool Will een klant is geworden. Zo ja, dan gaat "demo" uit de tekst.
 - Maarten checkt zijn rol bij de Campus Karting-website.
