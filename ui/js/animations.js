@@ -57,16 +57,27 @@
       srName.className = "sr-only";
       srName.textContent = text;
       el.appendChild(srName);
-      text.split("").forEach(function (ch, i) {
-        var span = document.createElement("span");
-        span.setAttribute("aria-hidden", "true");
-        span.textContent = ch === " " ? " " : ch;
-        span.style.display = "inline-block";
-        span.style.opacity = "0";
-        span.style.transform = "translateY(40px) rotate(-4deg)";
-        span.style.transition = "opacity 0.5s var(--ease), transform 0.5s var(--ease)";
-        span.style.transitionDelay = (0.05 + i * 0.04) + "s";
-        el.appendChild(span);
+      /* Letters per woord groeperen in een niet-afbreekbare span, met een
+         gewone spatie ertussen: de naam gaat op smalle schermen alleen tussen
+         woorden naar een nieuwe regel, nooit midden in een woord ("Kle / rk") */
+      var i = 0;
+      text.split(" ").forEach(function (word, w) {
+        if (w > 0) { el.appendChild(document.createTextNode(" ")); i++; }
+        var wordEl = document.createElement("span");
+        wordEl.className = "hero-split__word";
+        word.split("").forEach(function (ch) {
+          var span = document.createElement("span");
+          span.setAttribute("aria-hidden", "true");
+          span.textContent = ch;
+          span.style.display = "inline-block";
+          span.style.opacity = "0";
+          span.style.transform = "translateY(40px) rotate(-4deg)";
+          span.style.transition = "opacity 0.5s var(--ease), transform 0.5s var(--ease)";
+          span.style.transitionDelay = (0.05 + i * 0.04) + "s";
+          wordEl.appendChild(span);
+          i++;
+        });
+        el.appendChild(wordEl);
       });
     });
   }

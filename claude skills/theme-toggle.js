@@ -22,7 +22,7 @@
     /* Browser-chrome kleur laten meeschakelen met het thema */
     var metaTheme = document.querySelector('meta[name="theme-color"]');
     if (metaTheme) {
-      metaTheme.setAttribute("content", theme === "light" ? "#F8FAFF" : "#0A0A0F");
+      metaTheme.setAttribute("content", theme === "light" ? "#F7F8F7" : "#0A0A0A");
     }
     var isEN = (document.documentElement.lang || "").toLowerCase().indexOf("en") === 0;
     var btns = document.querySelectorAll("[data-theme-toggle]");

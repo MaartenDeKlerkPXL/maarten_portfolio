@@ -42,7 +42,7 @@
       }
       geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
       var mat = new THREE.PointsMaterial({
-        color: 0x60a5fa,
+        color: 0x7be07b,
         size: size,
         transparent: true,
         opacity: opacity,
@@ -175,11 +175,11 @@
       return pts;
     }
 
-    var c1 = cloud(280, 20, 0.05, colorA || 0x2563eb, 0.55);
-    var c2 = cloud(180, 14, 0.035, colorB || 0x60a5fa, 0.4);
+    var c1 = cloud(280, 20, 0.05, colorA || 0x32cd32, 0.55);
+    var c2 = cloud(180, 14, 0.035, colorB || 0x7be07b, 0.4);
     var ico = new THREE.Mesh(
       new THREE.IcosahedronGeometry(3.4, 1),
-      new THREE.MeshBasicMaterial({ color: colorA || 0x2563eb, wireframe: true, transparent: true, opacity: 0.1 })
+      new THREE.MeshBasicMaterial({ color: colorA || 0x32cd32, wireframe: true, transparent: true, opacity: 0.1 })
     );
     scene.add(ico);
 

@@ -1,6 +1,15 @@
 # HANDOFF — Website Maarten de Klerk
 
-**Laatst bijgewerkt:** 2026-10-09
+**Laatst bijgewerkt:** 2026-10-16
+
+## Sessie-aanvulling 2026-10-16: groene huisstijl + M-logo
+- **Blauwe versie bewaard** als tag én branch `blauw-v1` (lokaal en op GitHub). Terugkijken: `git checkout blauw-v1`. Terugzetten op main kan met een revert van de groen-commit; vraag dat eerst na.
+- **Nieuwe accentkleur #32CD32** (BrightNews-groen, zelfde als het logo). Tokens in `ui/css/themes.css`: dark `--accent #32CD32`, `--accent-2 #46D946`, `--accent-3 #7BE07B`; light `--accent-3 #1E7B1E` voor groene tekst (5,4:1 op wit; #32CD32 zelf haalt maar 2,1:1). `--accent-ink` is nu donker (#0A0A0A): tekst op groene knoppen, de actieve filter, selectie en spinner is donker. De overlay "Bekijk project" is een donkere scrim met groene tekst.
+- **Achtergronden neutraal donker** (#0A0A0A / #141515) in plaats van navy; light mode neutraal licht (#F7F8F7). Alle hardgecodeerde blauw- en indigotinten in CSS, HTML (SVG-pad op de over-pagina) en Three.js (deeltjes, starfield, 3D-laptop) zijn vertaald naar groen; de laptop is grafiet/zilver met groen logo en schermgloed.
+- **Logo**: bijgesneden versies in `assets/logo/` (`m-logo-wit.svg` voor donker, `m-logo-zwart.svg` voor licht, `favicon.svg` die zelf wisselt met het kleurschema van de browser). Originelen staan in `~/Claude/UI kit/Logo/`. Logo staat in header en footer (vervangt het bolletje), als favicon, en boven de naam in de intro van de homepage. Bij hover stijgt het logo een tikje.
+- **Mobiel**: onder 420 px zijn logo en naam in de header iets kleiner, onder 380 px staat alleen het logo (de link heeft een aria-label). Zo past het menuknopje ook op 360 px-telefoons (dat viel eerder al net buiten beeld).
+- **Bugfix hero-naam**: de letters stonden met harde spaties aan elkaar, waardoor de naam op smalle schermen midden in een woord afbrak ("Kle / rk"). Nu per woord gegroepeerd.
+- **og-banner.jpg** opnieuw gemaakt (groene homepage, 1200×630).
 
 ## Sessie-aanvulling 2026-10-09
 - **Agro Tycoon 2.0** toegevoegd bovenaan de projecten (NL + EN), met uitklappaneel (Idee, Spel, Techniek), link naar https://agro.mdeklerk.online/ en screenshot `assets/agro-tycoon.(webp|jpg)` (headless Chrome, 1440 px breed, uitleg overgeslagen, verkleind naar 1100 px). Eigen project; de paneeltekst is door Claude geschreven op basis van de README van `MaartenDeKlerkPXL/agro-tycoon2.0` en de game zelf.

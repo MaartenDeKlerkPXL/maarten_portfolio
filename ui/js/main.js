@@ -24,7 +24,7 @@
   // Ambient Three.js particle cloud behind the name.
   var introCanvas = document.getElementById("intro-canvas");
   if (introCanvas && typeof THREE !== "undefined" && window.MK && window.MK.initAmbient) {
-    try { window.MK.initAmbient(introCanvas, 0x2563eb, 0x3b82f6); } catch (e) {}
+    try { window.MK.initAmbient(introCanvas, 0x32cd32, 0x46d946); } catch (e) {}
   }
 
   // Step 1: label + name lines slide up out of their clip.
@@ -374,7 +374,7 @@
         : "rgba(30, 60, 140, " + alpha * 0.55 + ")";
 
       if (s.r > 0.9 && isDark) {
-        starColor = "rgba(147, 197, 253, " + alpha + ")";
+        starColor = "rgba(168, 235, 168, " + alpha + ")";
       }
 
       ctx.beginPath();
@@ -385,7 +385,7 @@
       if (s.r > 0.9 && isDark) {
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.r * 2.5, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(96, 165, 250, " + alpha * 0.12 + ")";
+        ctx.fillStyle = "rgba(123, 224, 123, " + alpha * 0.12 + ")";
         ctx.fill();
       }
     });

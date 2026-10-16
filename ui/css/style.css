@@ -135,7 +135,7 @@ ol { list-style: none; }
 
 ::selection {
   background: var(--accent);
-  color: #fff;
+  color: var(--accent-ink);
 }
 
 /* Custom scrollbar (WebKit) */

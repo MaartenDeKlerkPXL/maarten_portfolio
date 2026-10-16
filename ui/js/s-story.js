@@ -59,16 +59,16 @@
 
   var COLOURS = {
     dark: {
-      body: 0x122550, bodyRough: 0.14, bodyMetal: 0.95,
-      bodyEmit: 0x0a1a40, bodyEmitInt: 0.05,
-      screenEmit: 0x1d4ed8, logo: 0x2563eb, logoEmit: 0x3b82f6, logoInt: 0.8,
-      keyboard: 0x0a1428, inner: 0x091020
+      body: 0x1c1d1e, bodyRough: 0.14, bodyMetal: 0.95,
+      bodyEmit: 0x0a1a0a, bodyEmitInt: 0.05,
+      screenEmit: 0x229a22, logo: 0x32cd32, logoEmit: 0x46d946, logoInt: 0.8,
+      keyboard: 0x111212, inner: 0x0c0d0d
     },
     light: {
-      body: 0x4a90d9, bodyRough: 0.18, bodyMetal: 0.88,
-      bodyEmit: 0x2563eb, bodyEmitInt: 0.04,
-      screenEmit: 0x2563eb, logo: 0x60a5fa, logoEmit: 0x93c5fd, logoInt: 0.6,
-      keyboard: 0x1a3a70, inner: 0x122558
+      body: 0xb8bcb8, bodyRough: 0.18, bodyMetal: 0.88,
+      bodyEmit: 0x32cd32, bodyEmitInt: 0.04,
+      screenEmit: 0x32cd32, logo: 0x7be07b, logoEmit: 0xa8eba8, logoInt: 0.6,
+      keyboard: 0x2a2d2a, inner: 0x1c1f1c
     }
   };
   function getPalette() { return isDarkMode() ? COLOURS.dark : COLOURS.light; }
@@ -123,23 +123,23 @@
     THREE.RectAreaLightUniformsLib.init();
   }
 
-  scene.add(new THREE.AmbientLight(0xccddff, 0.35));
+  scene.add(new THREE.AmbientLight(0xe6efe6, 0.35));
 
-  var keyLight = new THREE.DirectionalLight(0xe8f0ff, 2.0);
+  var keyLight = new THREE.DirectionalLight(0xf2f5f2, 2.0);
   keyLight.position.set(4, 12, 8);
   keyLight.castShadow = true;
   keyLight.shadow.mapSize.set(2048, 2048);
   scene.add(keyLight);
 
-  var fillLight = new THREE.DirectionalLight(0x93c5fd, 0.7);
+  var fillLight = new THREE.DirectionalLight(0xa8eba8, 0.7);
   fillLight.position.set(-6, 4, 3);
   scene.add(fillLight);
 
-  var rimLight = new THREE.DirectionalLight(0x2563eb, 1.1);
+  var rimLight = new THREE.DirectionalLight(0x32cd32, 1.1);
   rimLight.position.set(-3, 5, -8);
   scene.add(rimLight);
 
-  var screenLight = new THREE.RectAreaLight(0x1d4ed8, 1.8, 29.4, 20);
+  var screenLight = new THREE.RectAreaLight(0x229a22, 1.8, 29.4, 20);
   screenLight.intensity = 0; /* uit tot de scroll-intro het scherm laat oplichten */
 
   /* ---- Environment map (RoomEnvironment via globaal THREE object) ---- */
@@ -189,8 +189,8 @@
   });
 
   var cameraDotMat = new THREE.MeshStandardMaterial({
-    color: 0x050810,
-    emissive: new THREE.Color(0x2563eb),
+    color: 0x060806,
+    emissive: new THREE.Color(0x32cd32),
     emissiveIntensity: 0.2
   });
 
@@ -221,7 +221,7 @@
     sCtx.fillRect(0, 0, 1470, 1000);
 
     var grd = sCtx.createRadialGradient(735, 0, 0, 735, 0, 700);
-    grd.addColorStop(0, dark ? "rgba(37,99,235,0.55)" : "rgba(74,144,217,0.5)");
+    grd.addColorStop(0, dark ? "rgba(50,205,50,0.55)" : "rgba(74,144,217,0.5)");
     grd.addColorStop(1, "rgba(0,0,0,0)");
     sCtx.fillStyle = grd;
     sCtx.fillRect(0, 0, 1470, 1000);
@@ -236,7 +236,7 @@
       sCtx.fill();
     });
 
-    sCtx.fillStyle = dark ? "#1A2E58" : "#1D4ED8";
+    sCtx.fillStyle = dark ? "#1A2E58" : "#229A22";
     roundRect(400, 16, 670, 40, 8);
     sCtx.fill();
     sCtx.fillStyle = "rgba(255,255,255,0.5)";
@@ -249,7 +249,7 @@
     sCtx.textAlign = "left";
     sCtx.fillText("Maarten de Klerk", 80, 250);
 
-    sCtx.fillStyle = dark ? "#60A5FA" : "#93C5FD";
+    sCtx.fillStyle = dark ? "#7BE07B" : "#A8EBA8";
     sCtx.font = "42px Inter, sans-serif";
     sCtx.fillText("UI/UX Designer & Web Developer", 80, 330);
 
@@ -263,7 +263,7 @@
       sCtx.fillStyle = dark ? "rgba(30,60,120,0.6)" : "rgba(74,144,217,0.3)";
       roundRect(x, 600, 420, 260, 12);
       sCtx.fill();
-      sCtx.fillStyle = dark ? "#2563EB" : "#3B82F6";
+      sCtx.fillStyle = dark ? "#32CD32" : "#46D946";
       roundRect(x + 20, 700, 100, 28, 14);
       sCtx.fill();
     });
@@ -301,7 +301,7 @@
     logoMat.emissiveIntensity = p.logoInt;
     logoMat.needsUpdate = true;
 
-    screenLight.color.setHex(isDarkMode() ? 0x1d4ed8 : 0x2563eb);
+    screenLight.color.setHex(isDarkMode() ? 0x229a22 : 0x32cd32);
 
     drawScreenContent();
     screenTex.needsUpdate = true;
@@ -399,7 +399,7 @@
             new THREE.MeshBasicMaterial({
               alphaMap: kTex,
               transparent: true,
-              color: isDarkMode() ? 0x3b82f6 : 0x60a5fa,
+              color: isDarkMode() ? 0x46d946 : 0x7be07b,
               opacity: 0.35
             })
           );
@@ -448,7 +448,7 @@
   var pBufGeo = new THREE.BufferGeometry();
   pBufGeo.setAttribute("position", new THREE.BufferAttribute(pPos, 3));
   scene.add(new THREE.Points(pBufGeo, new THREE.PointsMaterial({
-    color: 0x3b82f6,
+    color: 0x46d946,
     size: 0.38,
     transparent: true,
     opacity: 0.45,
