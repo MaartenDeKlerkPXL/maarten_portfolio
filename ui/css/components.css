@@ -1173,6 +1173,41 @@ button.project-card {
   box-shadow: 0 16px 40px -10px var(--glow);
 }
 
+/* ---------- Rustig zwevende gradient achter kaarten (.float-glow) ----------
+   Drie zachte groene vlekken op een laag die groter is dan de kaart en heel
+   langzaam rondzweeft (alleen transform, dus licht voor de browser). Ligt
+   achter de inhoud via isolation + z-index -1. */
+.float-glow {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.float-glow::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(closest-side at 30% 35%, rgba(50, 205, 50, 0.20), transparent),
+    radial-gradient(closest-side at 72% 64%, rgba(123, 224, 123, 0.13), transparent),
+    radial-gradient(closest-side at 58% 18%, rgba(34, 154, 34, 0.15), transparent);
+  animation: floatGlow 28s ease-in-out infinite alternate;
+  will-change: transform;
+}
+[data-theme="light"] .float-glow::after { opacity: 0.8; }
+/* De CTA-banner heeft al een eigen gloed: daar de zwevende laag zachter */
+.cta-banner.float-glow::after { opacity: 0.7; }
+[data-theme="light"] .cta-banner.float-glow::after { opacity: 0.55; }
+@keyframes floatGlow {
+  0%   { transform: translate3d(-6%, -4%, 0) rotate(0deg) scale(1); }
+  50%  { transform: translate3d(5%, 3%, 0) rotate(8deg) scale(1.08); }
+  100% { transform: translate3d(-2%, 6%, 0) rotate(-6deg) scale(1.03); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .float-glow::after { animation: none; }
+}
+
 /* ===========================================================
    Footer
    =========================================================== */
@@ -1504,6 +1539,14 @@ button.project-card {
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
   box-shadow: var(--shadow);
+}
+/* Honeypot-veld: buiten beeld, maar wel in de DOM zodat bots het invullen */
+.form__honey {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 .field { position: relative; margin-bottom: var(--sp-3); }
 .field label {

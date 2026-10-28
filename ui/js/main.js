@@ -168,16 +168,16 @@
           email: "Please enter a valid email address.",
           subject: "Please enter a subject.",
           message: "Your message needs at least 10 characters.",
-          ok: "Thanks! Your mail app is opening to send the message.",
-          fail: "Something went wrong. Please email me directly.",
+          ok: "Thanks! Your message has been sent. I usually reply within 24 hours.",
+          fail: "Sending didn't work. Please email me directly at ",
         }
       : {
           name: "Vul je naam in.",
           email: "Vul een geldig e-mailadres in.",
           subject: "Vul een onderwerp in.",
           message: "Je bericht heeft minstens 10 tekens nodig.",
-          ok: "Bedankt! Je mail-app opent om het bericht te versturen.",
-          fail: "Er ging iets mis. Mail me gerust rechtstreeks.",
+          ok: "Bedankt! Je bericht is verstuurd. Ik reageer meestal binnen 24 uur.",
+          fail: "Versturen lukte niet. Mail me gerust rechtstreeks op ",
         };
 
     var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -233,32 +233,77 @@
 
       var btn = form.querySelector(".form__submit");
       var status = form.querySelector(".form__status");
-      if (btn) btn.classList.add("is-loading");
+      var to = form.getAttribute("data-mailto") || "maartendeklerk2002@gmail.com";
+      var val = function (n) {
+        var el = form.querySelector('[name="' + n + '"]');
+        return el ? el.value.trim() : "";
+      };
 
-      window.setTimeout(function () {
-        if (btn) { btn.classList.remove("is-loading"); btn.classList.add("is-success"); }
-        if (status) { status.textContent = T.ok; status.classList.remove("error"); status.classList.add("show"); }
+      function showStatus(ok) {
+        if (!status) return;
+        status.classList.toggle("error", !ok);
+        if (ok) {
+          status.textContent = T.ok;
+        } else {
+          // Foutmelding met het adres als klikbare link (geen innerHTML met invoer)
+          status.textContent = T.fail;
+          var a = document.createElement("a");
+          a.href = "mailto:" + to;
+          a.textContent = to;
+          status.appendChild(a);
+          status.appendChild(document.createTextNode("."));
+        }
+        status.classList.add("show");
+      }
 
-        // mailto fallback — opens the user's mail client prefilled.
-        var get = function (n) {
-          var el = form.querySelector('[name="' + n + '"]');
-          return el ? encodeURIComponent(el.value.trim()) : "";
-        };
-        var to = form.getAttribute("data-mailto") || "maartendeklerk2002@gmail.com";
-        var subject = get("subject") || (isEN ? "Portfolio%20message" : "Bericht%20via%20portfolio");
-        var body =
-          (isEN ? "Name" : "Naam") + ": " + get("name") +
-          "%0D%0AEmail: " + get("email") +
-          "%0D%0A%0D%0A" + get("message");
-        window.location.href = "mailto:" + to + "?subject=" + subject + "&body=" + body;
+      // Honeypot: echte bezoekers zien dit veld niet; bots vullen het wel in
+      if (val("_honey")) {
+        showStatus(true);
+        form.reset();
+        return;
+      }
 
-        window.setTimeout(function () {
-          if (btn) btn.classList.remove("is-success");
+      if (btn) { btn.classList.add("is-loading"); btn.disabled = true; }
+      if (status) status.classList.remove("show", "error");
+
+      // Verzenden via FormSubmit (statische site, geen eigen server). De
+      // eerste inzending ooit stuurt FormSubmit een activatiemail naar het
+      // adres; pas na die bevestiging komen berichten echt binnen.
+      // FormData i.p.v. JSON: een "simpel" verzoek zonder CORS-preflight
+      var data = new FormData();
+      data.append("name", val("name"));
+      data.append("email", val("email"));
+      data.append("_replyto", val("email"));
+      data.append("_subject", "Portfolio: " + val("subject"));
+      data.append("subject", val("subject"));
+      data.append("message", val("message"));
+      data.append("_template", "table");
+      data.append("_captcha", "false");
+      fetch("https://formsubmit.co/ajax/" + encodeURIComponent(to), {
+        method: "POST",
+        headers: { "Accept": "application/json" },
+        body: data
+      })
+        .then(function (res) {
+          return res.json().catch(function () { return {}; }).then(function (data) {
+            var ok = res.ok && (data.success === true || data.success === "true");
+            if (!ok) throw new Error((data && data.message) || ("HTTP " + res.status));
+          });
+        })
+        .then(function () {
+          if (btn) { btn.classList.remove("is-loading"); btn.classList.add("is-success"); }
+          showStatus(true);
           form.reset();
           fields.forEach(function (f) { f.classList.remove("is-valid", "is-invalid", "touched"); });
-          if (status) status.classList.remove("show");
-        }, 4000);
-      }, 900);
+          window.setTimeout(function () {
+            if (btn) { btn.classList.remove("is-success"); btn.disabled = false; }
+          }, 4000);
+        })
+        .catch(function (err) {
+          if (window.console) console.warn("Contactformulier:", err && err.message);
+          if (btn) { btn.classList.remove("is-loading"); btn.disabled = false; }
+          showStatus(false);
+        });
     });
   }
   window.initContactForm = initContactForm;

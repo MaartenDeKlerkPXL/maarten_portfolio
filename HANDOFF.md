@@ -1,6 +1,11 @@
 # HANDOFF — Website Maarten de Klerk
 
-**Laatst bijgewerkt:** 2026-10-16
+**Laatst bijgewerkt:** 2026-10-28
+
+## Sessie-aanvulling 2026-10-28: zwevende gradient + werkend contactformulier
+- **Zwevende gradient**: herbruikbare klasse `.float-glow` (blok in `ui/css/components.css` vlak voor de footer-stijlen). Een `::after`-laag met drie zachte groene vlekken die in 28 s heen en weer zweeft (alleen transform; stil bij reduced motion). Staat op de CTA-banner "Klaar om samen aan de slag te gaan?" (alle pagina's waar hij staat), het contactformulier, de "Aan de slag"-kaart op de over-pagina en de footer. In de CTA-banner zachter (die heeft al een eigen gloed).
+- **Contactformulier verstuurt echt** via FormSubmit (`https://formsubmit.co/ajax/maartendeklerk2002@gmail.com`, als FormData zodat er geen CORS-preflight nodig is). Code in `initContactForm` in `ui/js/main.js`. Succes: bevestiging + formulier leeg. Fout: melding met het e-mailadres als link. Honeypot-veld `_honey` (`.form__honey`) tegen spambots. CSP op beide contactpagina's: `connect-src 'self' https://formsubmit.co`. Privacypagina (NL+EN) beschrijft nu FormSubmit in plaats van mailto.
+- **Activatie FormSubmit**: de allereerste inzending op de live site stuurt FormSubmit een activatiemail naar maartendeklerk2002@gmail.com. Pas na het klikken op die bevestigingslink komen berichten binnen; tot dan toont het formulier de foutmelding met het mailadres.
 
 ## Sessie-aanvulling 2026-10-16: groene huisstijl + M-logo
 - **Blauwe versie bewaard** als tag én branch `blauw-v1` (lokaal en op GitHub). Terugkijken: `git checkout blauw-v1`. Terugzetten op main kan met een revert van de groen-commit; vraag dat eerst na.
@@ -47,6 +52,7 @@ Grote onderhoudsronde afgerond:
 - Browser-pane-screenshots kunnen zwart zijn als de pane hidden is; Chrome-tabs stellen video-laden en reveal-animaties uit zolang de tab niet zichtbaar is (geen site-bug).
 
 ## Open punten
+- FormSubmit activeren: na livegang één testbericht sturen via het contactformulier en de activatiemail in Gmail bevestigen (kijk ook in spam).
 - Bij Spirithorses, Zeecontainers, Rijschool Will, IBE Motion, BrightNews en Agro Tycoon ontbreekt nog een "Volgende keer". Maarten levert die eventueel aan.
 - Maarten checkt de door Claude geschreven paneeltekst van Agro Tycoon.
 - De BrightNews-kaart linkt naar een binnenkort-pagina tot de lancering.

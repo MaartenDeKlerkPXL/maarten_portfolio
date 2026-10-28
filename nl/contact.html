@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com https://unpkg.com 'sha256-bsIc6P//SoFYo1DS1od1VPsWhvFCRt+s/elRqEMHSZU=' 'sha256-oR4gNsHfkxev5dmHxoPA6BW5lWsMYsch1kAU5/af6wY='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; media-src 'self'; connect-src 'self'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com https://unpkg.com 'sha256-bsIc6P//SoFYo1DS1od1VPsWhvFCRt+s/elRqEMHSZU=' 'sha256-oR4gNsHfkxev5dmHxoPA6BW5lWsMYsch1kAU5/af6wY='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; media-src 'self'; connect-src 'self' https://formsubmit.co; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="description" content="Neem contact op met Maarten de Klerk — UI/UX Designer & web developer uit Nijswiller. Beschikbaar voor nieuwe projecten." />
   <meta name="theme-color" content="#0A0A0A" />
@@ -156,7 +156,7 @@
           </aside>
 
           <!-- FORM -->
-          <form class="form" data-contact-form data-mailto="maartendeklerk2002@gmail.com" action="#" novalidate data-reveal="fade-right">
+          <form class="form float-glow" data-contact-form data-mailto="maartendeklerk2002@gmail.com" action="#" novalidate data-reveal="fade-right">
             <div class="field">
               <label for="name">Naam</label>
               <input type="text" id="name" name="name" placeholder="Je naam" autocomplete="name" />
@@ -185,6 +185,11 @@
               <svg class="field__icon cross" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
               <div class="field__error" aria-live="polite"></div>
             </div>
+            <!-- Honeypot tegen spambots: onzichtbaar en niet bereikbaar voor bezoekers -->
+            <div class="form__honey" aria-hidden="true">
+              <label for="hp-website">Website</label>
+              <input type="text" id="hp-website" name="_honey" tabindex="-1" autocomplete="off" />
+            </div>
             <button type="submit" class="btn btn--primary btn--block form__submit">
               <span class="label">Verstuur bericht
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
@@ -199,7 +204,7 @@
     </section>
   </main>
 
-  <footer class="footer">
+  <footer class="footer float-glow">
     <div class="container">
       <div class="footer__grid">
         <div class="footer__brand">
