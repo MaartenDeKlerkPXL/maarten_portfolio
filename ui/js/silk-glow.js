@@ -1,11 +1,11 @@
 /* ============================================================
-   silk-glow.js — Rustig glooiende "zijde"-golven achter kaarten.
+   silk-glow.js — Rustig glooiende gradient achter kaarten.
 
    Elk element met .float-glow krijgt een <canvas> met een kleine
-   WebGL-fragmentshader: een paar lagen golven in de groentinten van
-   de huisstijl, elk met een heldere kam, een korte gradient naar
-   donker en subtiele lijntjes erin. Transparant, zodat de kaart en
-   de tekst erdoorheen leesbaar blijven.
+   WebGL-fragmentshader: één vloeiende gradient in de groentinten van
+   de huisstijl, met grote zachte plooien (domain warping), een smalle
+   overgang licht/donker en een zachte glans waar de plooi omslaat.
+   Transparant, zodat de kaart en de tekst leesbaar blijven.
 
    - Animeert alleen als de kaart in beeld is en het tabblad zichtbaar.
    - prefers-reduced-motion: één stilstaand beeld, geen animatie.
@@ -30,49 +30,46 @@
     "uniform vec3 uMid;",
     "uniform vec3 uLight;",
     "",
-    "// Eén golflaag: alles onder de golflijn is 'stof'. Helder bij de kam,",
-    "// donkerder naar beneden (korte overgang), met een dunne glanslijn op",
-    "// de kam en fijne lijntjes die de golf volgen.",
-    "vec4 layer(vec2 p, float base, float amp, float f1, float f2, float sp, float ph, vec3 col) {",
-    "  float y = base",
-    "    + amp * sin(p.x * f1 + uTime * sp + ph)",
-    "    + amp * 0.55 * sin(p.x * f2 - uTime * sp * 0.73 + ph * 1.7);",
-    "  float d = y - p.y;                       // > 0: onder de kam",
-    "  float aa = 1.5 / uRes.y;",
-    "  float inside = smoothstep(-aa, aa, d);",
-    "  float shade = exp(-d * 7.0);             // korte gradient naar donker",
-    "  float crest = exp(-d * 140.0);           // glanslijn op de kam",
-    "  float lines = smoothstep(0.82, 1.0, sin(d * 160.0 + p.x * 3.0)) * 0.22 * exp(-d * 3.5);",
-    "  vec3 c = col * (0.30 + 0.85 * shade) + col * crest * 0.9 + col * lines;",
-    "  float a = inside * clamp(0.18 + 0.82 * shade + crest + lines, 0.0, 1.0);",
-    "  return vec4(c, a);",
-    "}",
-    "",
-    "vec4 over(vec4 top, vec4 under) {",
-    "  float a = top.a + under.a * (1.0 - top.a);",
-    "  vec3 c = (top.rgb * top.a + under.rgb * under.a * (1.0 - top.a)) / max(a, 0.0001);",
-    "  return vec4(c, a);",
-    "}",
-    "",
     "void main() {",
     "  vec2 uv = gl_FragCoord.xy / uRes;",
     "  float aspect = uRes.x / uRes.y;",
-    "  vec2 p = vec2(uv.x * aspect, uv.y);",
-    "  vec4 col = vec4(0.0);",
-    "  // achter → voor",
-    "  col = over(layer(p, 0.70, 0.075, 1.6, 2.9, 0.32, 0.0, uDeep), col);",
-    "  col = over(layer(p, 0.50, 0.090, 1.2, 2.3, 0.26, 2.1, uMid), col);",
-    "  col = over(layer(p, 0.30, 0.080, 1.9, 3.4, 0.38, 4.2, uLight), col);",
-    "  // Rand van de kaart zacht laten uitlopen",
-    "  float vign = smoothstep(0.0, 0.18, uv.x) * smoothstep(1.0, 0.82, uv.x);",
-    "  gl_FragColor = vec4(col.rgb, col.a * uAlpha * mix(0.55, 1.0, vign));",
+    "  // Schaal naar de lange zijde (begrensd): ook een hoge, smalle kaart",
+    "  // krijgt zo altijd zowel een lichte als een donkere plooi",
+    "  vec2 p = vec2(uv.x * aspect, uv.y) / max(aspect, 1.0) * min(max(aspect, 1.0 / aspect) * 1.15, 2.4);",
+    "  float t = uTime * 0.11;",
+    "",
+    "  // Domain warping: het vlak buigt zacht in zichzelf, als zijde",
+    "  vec2 q = vec2(",
+    "    sin(p.y * 1.25 + t * 1.6 + sin(p.x * 0.9 - t)),",
+    "    sin(p.x * 1.05 - t * 1.25 + sin(p.y * 1.3 + t * 0.8))",
+    "  );",
+    "  vec2 r = p + 0.62 * q;",
+    "  float v = 0.5 + 0.5 * sin(r.x * 1.35 + r.y * 1.05 + t * 1.9);",
+    "  v = mix(v, 0.5 + 0.5 * sin(r.y * 1.9 - r.x * 0.6 - t * 1.4), 0.32);",
+    "",
+    "  // Minder gespreid: de overgang licht/donker zit in een smalle band",
+    "  float fold = smoothstep(0.40, 0.70, v);",
+    "  // Tweede, tegengestelde plooi: zo is er altijd ergens licht in de kaart",
+    "  float v2 = 0.5 + 0.5 * sin(r.x * 1.1 - r.y * 1.4 - t * 1.2 + 3.14159);",
+    "  fold = max(fold, smoothstep(0.45, 0.78, v2) * 0.7);",
+    "  // Zijdeglans: een zachte heldere rand waar de plooi omslaat",
+    "  float sheen = pow(1.0 - abs(v * 2.0 - 1.2), 8.0);",
+    "",
+    "  vec3 col = mix(uDeep, uMid, fold);",
+    "  col = mix(col, uLight, clamp(sheen * 0.95 + fold * fold * 0.30, 0.0, 1.0));",
+    "  float a = clamp(0.06 + 0.85 * fold + 0.60 * sheen, 0.0, 1.0);",
+    "",
+    "  // Randen zacht laten uitlopen zodat het in de kaart 'zweeft'",
+    "  float vign = smoothstep(0.0, 0.22, uv.x) * smoothstep(1.0, 0.78, uv.x)",
+    "             * smoothstep(0.0, 0.15, uv.y) * smoothstep(1.0, 0.85, uv.y);",
+    "  gl_FragColor = vec4(col, a * uAlpha * mix(0.35, 1.0, vign));",
     "}"
   ].join("\n");
 
   // Kleuren per thema (0..1). Donker: diep-, merk- en lichtgroen.
   var THEMES = {
-    dark:  { deep: [0.07, 0.36, 0.07], mid: [0.196, 0.804, 0.196], light: [0.48, 0.88, 0.48], alpha: 0.42 },
-    light: { deep: [0.12, 0.48, 0.12], mid: [0.196, 0.804, 0.196], light: [0.55, 0.90, 0.55], alpha: 0.30 }
+    dark:  { deep: [0.02, 0.12, 0.03], mid: [0.15, 0.66, 0.15], light: [0.62, 0.96, 0.62], alpha: 0.40 },
+    light: { deep: [0.60, 0.88, 0.60], mid: [0.196, 0.804, 0.196], light: [0.85, 0.98, 0.85], alpha: 0.24 }
   };
 
   function compile(gl, type, src) {

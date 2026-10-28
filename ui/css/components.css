@@ -1218,6 +1218,8 @@ button.project-card {
   display: block;
 }
 .float-glow.has-silk::after { display: none; }
+/* In de CTA-banner staat tekst midden op de gradient: daar iets zachter */
+.cta-banner .float-glow__canvas { opacity: 0.7; }
 /* De kaart-reveal op de over-pagina animeert alle kinderen; het canvas niet */
 .s-beat__card.is-visible > .float-glow__canvas { animation: none; opacity: 1; transform: none; }
 
