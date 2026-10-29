@@ -1,87 +1,79 @@
 /* ============================================================
-   ANIMATION 1 — Cinematic intro engine (monopo saigon style).
-   Full editorial intro on a cold pageload; on same-session
-   navigations the engine bails out and page-transition.js does a
-   quick 0.4s fade instead. Dispatches `mk:intro-done` and sets
-   body.intro-done when the page is revealed.
+   ANIMATION 1 — Video-intro (eerste bezoek in een sessie).
+   Speelt een korte intro-video met alpha (dark of light variant,
+   HEVC voor Safari, WebM VP9 voor de rest). Rond 2,65 s veegt een
+   groene balk in de video alles weg; dan wordt de stage transparant
+   zodat de wipe de pagina eronder onthult. Bij 'ended' verdwijnt de
+   intro meteen (de video heeft zijn eigen exit). Klik, Enter of
+   spatie slaat over. Bij vervolgbezoeken in dezelfde sessie bailt
+   deze engine en doet de slash-loader (page-transition.js) de reveal.
+   Dispatcht `mk:intro-done` en zet body.intro-done.
    ============================================================ */
 (function mkIntro() {
   var intro = document.getElementById("mk-intro");
   if (!intro) { document.body.classList.add("intro-done"); return; }
 
-  // Same-session navigation: page-transition.js fades the intro out.
+  // Vervolgbezoek in dezelfde sessie: de loader regelt de reveal.
   try { if (sessionStorage.getItem("mk_visited")) return; } catch (e) {}
 
-  var fill = document.getElementById("mkIntroFill");
-  var enter = document.getElementById("mkIntroEnter");
-  var label = intro.querySelector(".mk-intro__label");
-  var lines = intro.querySelectorAll(".mk-intro__line");
+  var video = intro.querySelector(".mk-intro__video");
   var REDUCE = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var p = 0, done = false, gone = false;
+  var WIPE_AT = 2.65; // seconden: moment waarop de groene balk wegveegt
+  var gone = false;
+  var safety = null;
 
-  document.documentElement.classList.add("no-scroll");
-
-  // Ambient Three.js particle cloud behind the name.
-  var introCanvas = document.getElementById("intro-canvas");
-  if (introCanvas && typeof THREE !== "undefined" && window.MK && window.MK.initAmbient) {
-    try { window.MK.initAmbient(introCanvas, 0x32cd32, 0x46d946); } catch (e) {}
+  function finish() {
+    if (intro.parentNode) intro.parentNode.removeChild(intro);
+    document.documentElement.classList.remove("no-scroll");
+    document.body.classList.add("intro-done");
+    document.dispatchEvent(new CustomEvent("mk:intro-done"));
   }
 
-  // Step 1: label + name lines slide up out of their clip.
-  setTimeout(function () {
-    if (label) { label.style.opacity = "1"; label.style.transform = "translateY(0)"; }
-    lines.forEach(function (l, i) {
-      setTimeout(function () {
-        l.style.opacity = "1";
-        l.style.transform = "translateY(0)";
-      }, REDUCE ? 0 : i * 130);
-    });
-  }, REDUCE ? 0 : 220);
-
-  // Thin progress line — uneven organic increments.
-  function tick() {
-    if (done) return;
-    p = Math.min(p + (Math.random() * 10 + 4), 91);
-    if (fill) fill.style.width = p + "%";
-    setTimeout(tick, 95 + Math.random() * 100);
-  }
-  tick();
-
-  function showEnter() {
-    if (done) return;
-    done = true;
-    if (fill) fill.style.width = "100%";
-    setTimeout(function () {
-      if (enter) enter.classList.add("is-visible");
-      setTimeout(dismiss, REDUCE ? 200 : 1400); // auto-enter if no click
-    }, REDUCE ? 0 : 350);
-  }
-
-  function dismiss() {
+  // instant: na 'ended' of bij reduced motion meteen weg (geen leave-animatie)
+  function dismiss(instant) {
     if (gone) return;
     gone = true;
+    clearTimeout(safety);
     document.removeEventListener("keydown", onKey);
+    if (video) { try { video.pause(); } catch (e) {} }
+    if (instant === true) { finish(); return; }
     intro.classList.add("is-leaving");
-    setTimeout(function () {
-      if (intro.parentNode) intro.parentNode.removeChild(intro);
-      document.documentElement.classList.remove("no-scroll");
-      document.body.classList.add("intro-done");
-      document.dispatchEvent(new CustomEvent("mk:intro-done"));
-    }, REDUCE ? 0 : 900);
+    setTimeout(finish, 900);
   }
 
   function onKey(e) {
     if (e.key === "Enter" || e.key === " ") { e.preventDefault(); dismiss(); }
   }
-  intro.addEventListener("click", dismiss, { once: true });
+
+  // Geen video bij reduced motion (of als het element ontbreekt): meteen door
+  if (REDUCE || !video) { dismiss(true); return; }
+
+  document.documentElement.classList.add("no-scroll");
+  intro.addEventListener("click", function () { dismiss(); }, { once: true });
   document.addEventListener("keydown", onKey);
 
-  if (document.readyState === "complete") {
-    setTimeout(showEnter, REDUCE ? 0 : 700);
-  } else {
-    window.addEventListener("load", function () { setTimeout(showEnter, REDUCE ? 0 : 560); });
+  // Bron kiezen: thema (dark/light) en Safari (HEVC) of de rest (WebM)
+  var light = document.documentElement.getAttribute("data-theme") === "light";
+  var safari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  var base = "../assets/intro/mk-intro" + (light ? "-light" : "");
+  video.src = base + (safari ? "-hevc.mov" : ".webm");
+
+  // Wipe-moment exact volgen (timeupdate vuurt maar ~4x per seconde)
+  function watchWipe() {
+    if (gone) return;
+    if (video.currentTime >= WIPE_AT) { intro.classList.add("is-wiping"); return; }
+    requestAnimationFrame(watchWipe);
   }
-  setTimeout(function () { if (!done) showEnter(); }, 5000); // safety net
+
+  video.addEventListener("ended", function () { dismiss(true); }, { once: true });
+  video.addEventListener("error", function () { dismiss(true); }, { once: true });
+  var played = video.play();
+  if (played && typeof played.then === "function") {
+    played.then(function () { requestAnimationFrame(watchWipe); }).catch(function () { dismiss(true); });
+  } else {
+    requestAnimationFrame(watchWipe);
+  }
+  safety = setTimeout(function () { dismiss(true); }, 6000); // vangnet
 })();
 
 /* ============================================================

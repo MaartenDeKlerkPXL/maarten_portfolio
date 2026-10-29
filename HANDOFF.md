@@ -1,6 +1,12 @@
 # HANDOFF — Website Maarten de Klerk
 
-**Laatst bijgewerkt:** 2026-10-28
+**Laatst bijgewerkt:** 2026-10-29
+
+
+## Sessie-aanvulling 2026-10-29: video-intro + slash-loader
+- **Intro-video** (alleen eerste bezoek in een sessie, alleen op nl/ en en/index.html): `#mk-intro` bevat nu één `<video class="mk-intro__video">`. `main.js` (mkIntro) kiest de bron: dark of light via `data-theme`, Safari krijgt `-hevc.mov`, de rest `.webm`. Bestanden in `assets/intro/` (HEVC met alpha via hevc_videotoolbox `-q:v 50`, ~1,4 MB; WebM VP9 met alpha, ~0,4 MB). Masters (ProRes 4444) staan in `~/Movies/Portfolio Intro/` en horen niet in de repo. Vanaf 2,65 s krijgt de intro `.is-wiping` en wordt de stage (`var(--bg)`) in 0,5 s transparant zodat de groene wipe de pagina onthult; bij `ended`, fout of geblokkeerde play direct weg; klik/Enter/spatie slaat over; vangnet 6 s; reduced motion: geen video.
+- **Slash-loader** (`#mk-loader`, op alle 10 pagina's bovenaan `<body>`): kritieke CSS inline in `<head>` (`<style id="mk-loader-css">`), plus een klein inline script dat `html.mk-loading` zet bij een vervolgbezoek (sessionStorage `mk_visited`); de hash daarvan staat in de CSP van elke pagina. Gedrag in `claude skills/page-transition.js`: inkomend na window load + fonts.ready (min 350 ms, max 4 s) naar rechts wegvegen en `mk:intro-done` dispatchen; uitgaand 0,45 s dichtvegen, logo, dan navigeren; bfcache direct verbergen; reduced motion alleen fade. Vangnetten: `<noscript>` verbergt hem en een CSS-animatie verbergt hem na 5 s. Het oude `.page-curtain` is weg.
+- **Let op bij het wijzigen van het inline loader-script**: de sha256-hash in de CSP moet dan opnieuw berekend worden, anders blokkeert de CSP het script.
 
 ## Sessie-aanvulling 2026-10-28: zwevende gradient + werkend contactformulier
 - **Gradient achter kaarten (update)**: `.float-glow`-kaarten krijgen nu een WebGL-canvas uit `ui/js/silk-glow.js` (op alle pagina's geladen): één vloeiende groene zijde-gradient met grote plooien en een glansrand, transparant (dark 0,40 / light 0,24; in de CTA-banner nog 70% daarvan). Animeert alleen in beeld, stil bij reduced motion; zonder WebGL blijft de oude CSS-gloed hieronder als fallback.

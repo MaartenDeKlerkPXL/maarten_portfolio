@@ -174,22 +174,8 @@ body.intro-done .hero .hero-stagger > *:nth-child(7) { animation-delay: 0.68s; }
 .scroll-cue svg { animation: bounceArrow 1.8s var(--ease-in-out) infinite; }
 
 /* ---------- Page transition overlay ---------- */
-.page-curtain {
-  position: fixed;
-  inset: 0;
-  z-index: var(--z-transition);
-  background: var(--bg);
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.32s ease;
-}
-.page-curtain.is-active {
-  opacity: 1;
-  pointer-events: all;
-}
-/* (v5) Initial-reveal curtain removed — the #mk-intro cinematic intro
-   handles the first reveal. The .page-curtain above is still used by
-   page-transition.js for smooth fades between pages on navigation. */
+/* Paginaovergangen: de slash-loader (#mk-loader). Zijn kritieke CSS staat
+   inline in de <head> van elke pagina, het gedrag in page-transition.js. */
 
 /* ---------- Marquee ---------- */
 .marquee { position: relative; overflow: hidden; }

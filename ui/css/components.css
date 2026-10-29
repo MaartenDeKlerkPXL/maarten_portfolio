@@ -1875,132 +1875,28 @@ a.cinfo-row:hover { background: var(--surface-2); transform: translateX(4px); }
   z-index: 99999;
   pointer-events: all;
 }
+/* Achtergrond uit de tokens, zodat de intro in light mode ook klopt */
 .mk-intro__stage {
   position: relative;
   width: 100%;
   height: 100%;
-  background: #0A0A0A;
-  overflow: hidden;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-.mk-intro__canvas {
-  position: absolute;
-  inset: 0;
-  width: 100% !important;
-  height: 100% !important;
-  opacity: 0.45;
-}
-.mk-intro__veil {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 70% 70% at 50% 50%, transparent 30%, rgba(10, 10, 10, 0.7) 100%);
-  pointer-events: none;
-}
-.mk-intro__copy {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  padding-inline: clamp(24px, 6vw, 80px);
-}
-.mk-intro__logo {
-  display: block;
-  width: clamp(56px, 7vw, 84px);
-  height: auto;
-  margin: 0 auto clamp(18px, 2.6vw, 30px);
-  animation: introLogoUp 0.9s var(--ease) 0.1s both;
-}
-@keyframes introLogoUp {
-  from { opacity: 0; transform: translateY(18px); }
-  to   { opacity: 1; transform: none; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .mk-intro__logo { animation: none; }
-}
-.mk-intro__label {
-  display: block;
-  font-family: var(--font-head);
-  font-size: clamp(0.65rem, 1.2vw, 0.85rem);
-  font-weight: 400;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--accent-3);
-  margin-bottom: clamp(16px, 2.5vw, 28px);
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
-}
-.mk-intro__name {
-  font-family: var(--font-head);
-  font-size: clamp(4rem, 14vw, 11rem);
-  font-weight: 800;
-  line-height: 0.88;
-  letter-spacing: -0.04em;
-  color: var(--text);
-  margin: 0;
   overflow: hidden;
+  background-color: var(--bg);
+  transition: background-color 0.5s var(--ease);
 }
-.mk-intro__line {
+/* Rond 2,65 s veegt de groene balk in de video alles weg: de stage wordt dan
+   transparant, zodat de wipe echt de pagina eronder onthult */
+.mk-intro.is-wiping .mk-intro__stage { background-color: transparent; }
+.mk-intro__video {
   display: block;
-  opacity: 0;
-  transform: translateY(100%);
-  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
-}
-.mk-intro__line[data-line="1"] {
-  background: linear-gradient(135deg, #7BE07B 0%, #32CD32 40%, #1FA51F 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  transition-delay: 0.12s;
-}
-.mk-intro__progress {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: rgba(50, 205, 50, 0.12);
-  z-index: 3;
-}
-.mk-intro__progress-fill {
+  width: 100%;
   height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, var(--accent), var(--accent-3));
-  box-shadow: 0 0 12px var(--glow);
-  transition: width 0.12s ease;
-}
-.mk-intro__enter {
-  position: absolute;
-  bottom: clamp(28px, 5vh, 56px);
-  left: 50%;
-  transform: translateX(-50%) translateY(16px);
-  z-index: 3;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  opacity: 0;
-  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
-}
-.mk-intro__enter.is-visible {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
-.mk-intro__enter-text {
-  font-family: var(--font-head);
-  font-size: 0.7rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-.mk-intro__enter svg {
-  width: 20px;
-  height: 20px;
-  color: var(--accent-3);
-  animation: bounceArrow 2s var(--ease-in-out) infinite;
+  max-width: 100vw;
+  max-height: 100vh;
+  object-fit: contain;
 }
 .mk-intro.is-leaving {
   pointer-events: none;
